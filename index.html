@@ -129,9 +129,9 @@
             <a href="https://www.google.com/maps/d/edit?mid=1dQd_1LbhgPMOJI8pydYE5AMoD3okyq0&usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-emerald-600/90 hover:bg-emerald-500 backdrop-blur-md px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-white border border-emerald-400/50 transition-transform shadow-md hover:-translate-y-0.5">
                 <i class="fa-solid fa-map-location-dot text-emerald-200"></i> 全點位 Google 地圖
             </a>
-            <a href="https://gn317294.github.io/list/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-amber-600/90 hover:bg-amber-500 backdrop-blur-md px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-white border border-amber-400/50 transition-transform shadow-md hover:-translate-y-0.5">
+            <button onclick="openModal('checklistModal')" class="inline-flex items-center gap-1.5 bg-amber-600/90 hover:bg-amber-500 backdrop-blur-md px-4 py-2 rounded-xl text-xs md:text-sm font-bold text-white border border-amber-400/50 transition-transform shadow-md hover:-translate-y-0.5">
                 <i class="fa-solid fa-list-check text-amber-200"></i> 行程 Check List
-            </a>
+            </button>
         </div>
     </div>
 </header>
@@ -1744,53 +1744,66 @@
         <ul class="space-y-2.5 text-xs">
             <li class="bg-orange-50 border border-orange-200 p-2.5 rounded-xl">
                 <span class="font-black text-orange-700 block mb-0.5">🟠 Day 1（OTS 14:10 目標出發）</span>
-                領到行李後，2 位大人可先至接駁區、提前至 OTS 掛號與確認現場排隊狀況；3 位駕駛各自的租車文件與身分仍須依現場規定親自辦理確認。全團以 14:10 為目標出發；若延至 14:20 才完成，直接開往玉泉洞，完全不追 EISA 太鼓秀，保持零焦慮。
+                14:00 進入「只做必要事項」模式（租賃文件、車況、汽座、行李、ETC）。全團以 14:10 為目標出發；若延至 14:20 完成，直接開往玉泉洞，完全不追 EISA 太鼓秀，保持零焦慮。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
                 <span class="font-black text-red-700 block mb-0.5">🔴 Day 1（16:40 離園北上紅線）</span>
-                入園前強制全員上洗手間；16:15 啟動撤退程序（廁所 ➔ 領回物品 ➔ 12 人集合 ➔ 步行回停車場 ➔ 4 名兒童安全座椅確認 ➔ 3 車點名），16:40 準時發車北上。
+                入園前強制全員上洗手間；16:15 啟動撤退程序（廁所 ➔ 領回物品 ➔ 12 人集合 ➔ 步行回停車場 ➔ 4 名兒童安全座椅確認 ➔ 3 車點名），16:40 最晚發車北上。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
-                <span class="font-black text-red-700 block mb-0.5">🔴 Day 1（AEON 名護分流 ＆ 獨立導航）</span>
-                週五傍晚北上各車獨立導航至 AEON 名護店，絕不在國道追車；18:30–20:15 執行分段「18:30 晚餐 ➔ 19:30 目標採買 ➔ 20:00 集合」，20:30 輕鬆入住飯店。
+                <span class="font-black text-red-700 block mb-0.5">🔴 Day 1（20:00 AEON 離開紅線）</span>
+                週五傍晚北上各車獨立導航，絕不在國道追車；18:30–20:00 執行分段「晚餐 ➔ 目標性採買 ➔ 集合」，為確保 Day 2 早起體力，最晚 20:00 發車前往飯店。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
                 <span class="font-black text-red-700 block mb-0.5">🔴 Day 2（A 組海豚體驗 07:50 集合 ＆ 07:55 發車警戒）</span>
-                海豚組 07:50 集合、07:55 準時雙車出發，確保 08:30–08:40 抵達園區，08:40 前完成第一場報到；10:45–11:10 完成第二場下水前報到與整裝。
+                海豚組 07:50 集合、07:55 準時雙車出發，確保 08:30–08:40 抵達園區，08:40 前完成第一場報到；10:40–11:10 完成第二場下水前報到與整裝。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
-                <span class="font-black text-red-700 block mb-0.5">🔴 Day 2（A 組岸本 20 分鐘停損 ＆ 小孩斷電警戒）</span>
-                12:30 水中活動結束後預留 50 分鐘（至 13:20）充裕盥洗更衣與上車，13:20 發車、13:35 抵達岸本食堂（排隊超過 20 分鐘立刻點擊具體備案導航轉場）；餐後若 3 位小孩有 2 位以上熟睡，直接取消備瀨行程開回飯店。
+                <span class="font-black text-red-700 block mb-0.5">🔴 Day 2（A 組岸本判斷 ＆ 午後斷電停損）</span>
+                12:30 水中活動結束後預留 50 分鐘充裕盥洗更衣與上車，13:20 發車，13:40 完成岸本食堂第一判斷（目測排隊可在 20 分鐘內消化則留；否則立刻轉場海邦丸）；餐後若小孩斷電/鬧脾氣或大人疲態，直接取消備瀨行程開回飯店。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
                 <span class="font-black text-red-700 block mb-0.5">🔴 Day 3（08:10 飯店提早發車 ＆ 09:25 黑潮之海就位）</span>
-                早餐 07:00 開始吃，08:00 集合、08:10 準時 3 車出發，08:45 抵達 P7，保留充裕 35 分鐘步行、如廁與集結緩衝，09:25 前全團於大水槽前就位完畢，09:30 準時看鬼蝠魟進食。
+                早餐 07:00 開始吃，08:00 集合、08:10 準時 3 車出發，08:45 抵達 P7，保留充裕 40 分鐘「12人團體進館安全緩衝」（停車、如廁、手扶梯直切大水槽），09:25 前全團於大水槽前就位完畢。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
                 <span class="font-black text-red-700 block mb-0.5">🔴 Day 3（10:50 全團前往海豚劇場 ＆ 美海廣場室內休息午餐）</span>
-                10:50 全團慢慢往海豚劇場移動（可由 1 位成人提前 5–10 分鐘先行探路找遮陽座）；12:00 午餐移至「美海廣場／綜合休息處」吹冷氣休息與享用簡易午餐。
+                不晚於 10:50 全團開始往海豚劇場移動（可由 1 位成人提前 5–10 分鐘先行探路找遮陽座），出館務必蓋透明螢光印章；12:00 午餐移至「美海廣場／綜合休息處」吹冷氣休息與享用簡易午餐，不奔波追餐廳。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
-                <span class="font-black text-red-700 block mb-0.5">🔴 Day 3（14:40 退至後方斜坡看鯨鯊 ＆ 16:15 最晚發車撤退）</span>
-                14:40 集合至大水槽後方斜坡/階梯高處觀賞；🔴 15:45 開始撤退、16:05 回到 P7 停車場、16:10 上車完成、16:15 最晚發車，正面應對週日 449 縣道南下車潮。
+                <span class="font-black text-red-700 block mb-0.5">🔴 Day 3（14:40 退至 1F 正面大水槽看鯨鯊 ＆ 16:10 最晚發車撤退）</span>
+                14:40 集合至大水槽 1F 正面大空間觀賞；🔴 15:35 準時開始撤退、16:00 回到 P7 停車場、16:05 上車完成、16:10 最晚發車（多賺 5 分鐘最值錢安全墊，正面應對週日 449 縣道南下車潮）。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
-                <span class="font-black text-red-700 block mb-0.5">🔴 Day 3（燒肉目標抵達 ＆ 17:45 全團入席）</span>
-                17:20–17:35 目標抵達名護店停車場，從容停妥 3 台車。先到的車輛先派代表入店報到（單號 9ASHJD），確保 17:45 全團準時入席。
+                <span class="font-black text-red-700 block mb-0.5">🔴 Day 3（燒肉目標抵達 ＆ 先到先報到 ＆ 17:45 全團入席）</span>
+                17:20–17:35 目標抵達名護店停車場，從容停妥 3 台車。第一台抵達的車輛立即派代表入店報到（單號 9ASHJD），17:35 確保全團 12 人於餐廳前集合完畢，確保 17:45 全團準時入席。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
-                <span class="font-black text-red-700 block mb-0.5">🔴 Day 4（09:00 DMM 體驗券機制確認 ＆ 4 位小孩優先）</span>
-                指定 2 位大人開啟 2 支手機確認官方當日機制：若線上開放則立即搶購 4 張兒童票；若採現場先到先得則抵達後直奔 2F 售票處購買（小學三年級以下由成人免費陪同）。
+                <span class="font-black text-red-700 block mb-0.5">🔴 Day 4（09:10 裝車紅線 ＆ 09:30 準時退房）</span>
+                指定 2 位大人 09:00 確認 DMM 體驗券機制（4 位小孩優先）；🔴 09:10 司機務必提早將膨脹的大行李搬上車排列定位，確保 09:30 準時退房發車。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
-                <span class="font-black text-red-700 block mb-0.5">🔴 Day 4（15:30 停止採買＋紙箱打包 ＆ 15:45 準時發車）</span>
-                15:30 停止採買並在超市索取/購買紙箱完成封箱託運，15:45 準時發車離開 iias 前往加油還車；預留 45 分鐘充裕處理還車驗收與接駁。
+                <span class="font-black text-red-700 block mb-0.5">🔴 Day 4（15:30 鐵血採買截止線 ＆ 獨立導航還車）</span>
+                15:30 絕對停止採買（嚴禁「再逛5分鐘」），利用超市紙箱快速封箱託運；15:45 準時發車離開 iias；各車加油時說出「Regular, Mantan」並獨立前往 OTS，絕不在加油站等候集結，搭乘最快班次接駁車赴機場。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
-                <span class="font-black text-red-700 block mb-0.5">🔴 Day 4（機場基地營分流 ＆ 彈性開櫃託運）</span>
-                抵達機場直上國際線 3 樓建立「基地營」，長輩小孩原地休息，派壯丁前往國內線買晚餐回基地；抵達後立即確認華航 CI123 櫃檯狀態，一開櫃立即全團優先託運。
+                <span class="font-black text-red-700 block mb-0.5">🔴 Day 4（機場基地營 ＆ 提早登機防線）</span>
+                抵達機場直上國際線 3 樓建立「基地營」，長輩小孩原地休息，派壯丁前往國內線買晚餐回基地；19:55 前全團務必完成安檢通關並找到登機門，20:15 全員於 Gate 集合完畢。
             </li>
         </ul>
+    </div>
+</div>
+
+<!-- 行程 Check List Modal -->
+<div id="checklistModal" class="modal">
+    <div class="modal-content h-[85vh] flex flex-col" style="max-width: 800px; padding: 20px;">
+        <div class="flex justify-between items-center mb-4 border-b pb-2 shrink-0">
+            <h3 class="text-lg font-black text-amber-700"><i class="fa-solid fa-list-check mr-2 text-amber-600"></i>行程 Check List</h3>
+            <button onclick="closeModal('checklistModal')" class="text-gray-400 hover:text-gray-600 text-xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex-1 w-full relative rounded-xl overflow-hidden bg-gray-50 border border-gray-200 shadow-inner">
+            <iframe src="https://gn317294.github.io/list/" class="absolute inset-0 w-full h-full border-0 rounded-xl"></iframe>
+        </div>
     </div>
 </div>
 
