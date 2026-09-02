@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+    <!-- STREAMING_CHUNK:Configuring head and metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>沖繩 4 天 3 夜家族自駕之旅</title>
@@ -11,6 +12,7 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- STREAMING_CHUNK:Styling the layout... -->
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
@@ -113,6 +115,7 @@
 </head>
 <body class="antialiased pb-28 selection:bg-cyan-200 selection:text-cyan-900">
 
+<!-- STREAMING_CHUNK:Rendering Hero Section -->
 <header class="hero-bg relative min-h-[45vh] md:min-h-[50vh] flex items-center justify-center rounded-b-[2.5rem] overflow-hidden shadow-2xl pb-6">
     <div class="relative z-10 text-center text-white px-4 reveal active pt-8">
         <span class="inline-block py-1.5 px-4 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-xs font-semibold mb-3 tracking-widest shadow-lg">FAMILY TRIP 2026</span>
@@ -136,6 +139,7 @@
     </div>
 </header>
 
+<!-- STREAMING_CHUNK:Rendering Navigation -->
 <!-- 動態天數切換選單 (黏性定位) -->
 <nav class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-gray-200 shadow-sm py-3 px-2 mt-2">
     <div class="max-w-4xl mx-auto overflow-x-auto no-scrollbar">
@@ -162,14 +166,15 @@
 
 <main class="max-w-4xl mx-auto px-4 py-6">
     
+    <!-- STREAMING_CHUNK:Rendering Day 1 -->
     <!-- ==================== Day 1 ==================== -->
     <div id="day1" class="day-content block reveal active">
         <h2 class="text-2xl font-black text-cyan-900 mb-4 flex items-center leading-tight">
-            <i class="fa-solid fa-plane-arrival mr-3 text-cyan-600"></i>Day 1｜9/25 (五) 那霸抵達 ➔ OTS取車 ➔ 沖繩世界【全員挖珍珠】 ➔ 雙車北上
+            <i class="fa-solid fa-plane-arrival mr-3 text-cyan-600"></i>Day 1｜9/25 (五) 那霸抵達 ➔ OTS充裕取車 ➔ 沖繩世界【無壓解放版】➔ 傍晚北上 ➔ 入住
         </h2>
 
         <div class="mobile-timeline">
-            <!-- 10:45-12:35 機場抵達與接駁 -->
+            <!-- 10:45-12:30 機場抵達與接駁 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
@@ -179,12 +184,12 @@
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">10:45 - 12:35</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">10:45 - 12:30</span>
                             <span class="text-[11px] font-mono bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">華航 CI120</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
                             <li>1. 華航 CI120 抵達（機上已用飛機餐），出關提領行李、如廁。</li>
-                            <li class="bg-cyan-50 p-1.5 rounded font-bold text-cyan-800">2. 🚶 <strong>【全團以第一班接駁為目標】：</strong>全員前往國內線 10-A (R-10) 搭乘免費接駁車前往 OTS（將 12:00–12:35 視為正常抵達區間）。</li>
+                            <li class="bg-cyan-50 p-1.5 rounded font-bold text-cyan-800">2. 🚶 <strong>【全團以第一班接駁為目標】：</strong>全員前往國內線 10-A (R-10) 搭乘 OTS 免費接駁車至豐崎營業所（若遇接駁車滿載，才派 2 位代表先搭前車前往掛號）。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=那霸機場" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors">
                             <i class="fa-solid fa-plane mr-1"></i> 那霸機場資訊
@@ -193,7 +198,7 @@
                 </div>
             </div>
 
-            <!-- 12:35-14:10 OTS 取車 -->
+            <!-- 12:30-14:10 OTS 取車 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
@@ -203,13 +208,14 @@
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">12:35 - 14:10</span>
-                            <span class="text-[11px] font-bold text-orange-700 bg-orange-100 px-2 py-0.5 rounded border border-orange-200">🟠 目標出發線</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">12:30 - 14:10</span>
+                            <span class="text-[11px] font-bold text-orange-700 bg-orange-100 px-2 py-0.5 rounded border border-orange-200">🟠 14:10 目標出發</span>
                         </div>
-                        <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. 2 位主要駕駛親自辦理 2 筆合約與 ETC。檢查車況、安裝確認 3 張兒童汽座，裝載行李。</li>
-                            <li class="text-red-600 font-bold">2. 🔴 14:00 進入「只做必要事項」模式。</li>
-                            <li>3. <strong>發車判斷：</strong>≤ 14:10 完美出發｜14:11–14:20 正常｜14:21–14:30 完全取消太鼓秀直奔玉泉洞｜> 14:40 若未出發，依即時 ETA 判斷，絕不超速違規。</li>
+                        <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                            <li>1. 抵達 OTS，2 位主要駕駛持各自護照、駕照正本與日文譯本親自辦理 2 筆租賃合約、設定 ETC。</li>
+                            <li>2. 現場檢查車況、安裝並確認 3 張兒童汽座，裝載 9 人行李。</li>
+                            <li class="text-red-600 font-bold">3. 🔴 14:00 進入「只做必要事項」模式（文件、車況、汽座、行李）。</li>
+                            <li class="text-orange-700 font-bold">4. 🟠 14:10 目標出發（若延至 14:20 完成取車，直接開往玉泉洞，完全不追太鼓秀）。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=OTS租車+臨空豐崎營業所" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors">
                             <i class="fa-solid fa-car mr-1"></i> OTS 臨空豐崎導航
@@ -218,15 +224,16 @@
                 </div>
             </div>
 
-            <!-- 14:10-14:55 車程與停車 -->
+            <!-- 14:10-14:45 車程 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">14:10 - 14:55</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">14:10 - 14:45</span>
+                            <span class="text-[11px] text-gray-500 font-bold">車程與停車</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-3"><strong>車程與停車：</strong>2 車各自出發，抵達大型露天停車場。以第二台車熄火時間開始計算後續集合點。</p>
+                        <p class="text-xs text-gray-600 mb-3">2 車出發前往沖繩世界（車程約 30–35 分鐘），大型露天停車場停妥 2 台車。</p>
                         <a href="https://www.google.com/maps/search/?api=1&query=沖繩世界" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors">
                             <i class="fa-solid fa-route mr-1"></i> 玉泉洞路線導航
                         </a>
@@ -234,20 +241,19 @@
                 </div>
             </div>
 
-            <!-- 14:55-15:25 集合購票 -->
+            <!-- 14:45-15:00 購票與如廁 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">14:55 - 15:25</span>
-                            <span class="text-[11px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">🎫 30分鐘緩衝</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">14:45 - 15:00</span>
+                            <span class="text-[11px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">🎫 集合與整裝</span>
                         </div>
-                        <p class="text-xs text-gray-800 font-bold mb-1.5">【30分鐘緩衝】集合、購票 ＆ 強制如廁</p>
-                        <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. 預留充足 30 分鐘：9 人集合點名、售票處購票。</li>
-                            <li class="text-blue-700 font-bold">2. 🚽 強制全員使用洗手間（洞內無廁所）。</li>
-                            <li class="text-red-600 font-bold">3. 🔴 15:25 準時刷票入洞（⚠️ 16:00 最終受付為絕對紅線）。</li>
+                        <ul class="text-xs text-gray-600 space-y-1.5 mb-3 font-bold">
+                            <li>1. 預留 15 分鐘讓 2 車 9 人下車集合、點名、購票。</li>
+                            <li class="text-blue-700">2. 🚽 強制全員使用洗手間（洞內全長 890 公尺，全程無廁所，小孩皆自行牽行慢走）。</li>
+                            <li class="text-gray-500">3. (14:30 太鼓秀已過，按原計畫直接略過，保持零壓)。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=沖繩世界" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors">
                             <i class="fa-solid fa-ticket mr-1"></i> 沖繩世界導航
@@ -256,19 +262,19 @@
                 </div>
             </div>
 
-            <!-- 15:25-16:25 玉泉洞漫步 -->
+            <!-- 15:00-16:00 玉泉洞漫步 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://lh3.googleusercontent.com/d/1MKcK4Q5273NnKgZ1XMcPWt-55JKk8EZW" class="w-full h-full object-cover" alt="玉泉洞" onerror="this.src='https://placehold.co/800x400/0284c7/ffffff?text=玉泉洞'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">⭐ 漫步玉泉洞</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">⭐ 漫步玉泉洞（絕對核心・60分鐘）</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">15:25 - 16:25</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">15:00 - 16:00</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-3">放慢腳步慢遊鐘乳石洞。約 16:15–16:25 抵達出口搭乘電扶梯直達地面王國村最深處（不刻意湊滿 60 分鐘）。</p>
+                        <p class="text-xs text-gray-600 mb-3">考量地面濕滑與老小體力，放慢腳步慢遊鐘乳石洞（充裕 60 分鐘不催促）。出洞搭乘長型電扶梯直達地面「王國村／古民家聚落」。</p>
                         <a href="https://www.google.com/maps/search/?api=1&query=沖繩世界" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors">
                             <i class="fa-solid fa-location-dot mr-1"></i> 沖繩世界導航
                         </a>
@@ -276,90 +282,61 @@
                 </div>
             </div>
 
-            <!-- 16:25-16:55 全員挖珍珠 -->
+            <!-- 16:00-16:40 體驗、撤退 ＆ 集合確認 -->
             <div class="relative mb-8 pl-6">
-                <div class="timeline-node bg-yellow-400"></div>
-                <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-yellow-400 bg-yellow-50/30">
+                <div class="timeline-node bg-cyan-500"></div>
+                <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-red-500">
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-yellow-700 font-bold bg-yellow-100 px-2.5 py-0.5 rounded text-xs">16:25 - 16:55</span>
-                            <span class="text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">🔴 16:55 停損點</span>
+                            <span class="text-red-700 font-bold bg-red-50 px-2.5 py-0.5 rounded text-xs">16:00 - 16:40</span>
+                            <span class="text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">🔴 16:40 撤退防線</span>
                         </div>
-                        <p class="text-xs text-gray-800 font-bold mb-1.5">🦪 【全員挖珍珠】 ＆ 購買點心</p>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. 出洞後全團一同前往體驗挖珍珠。</li>
-                            <li class="text-red-600 font-bold">2. 🔴 16:55 停損點：若飾品加工未完成，直接請店家寄送，絕不乾等。</li>
-                            <li>3. 🍘 順路採買開口笑/點心放車上墊胃，防塞車飢餓。</li>
+                            <li><strong class="text-green-700">1. 16:00–16:15 彈性時間：</strong>出洞後抵達工藝區。🟡 挖珍珠降為純 Bonus（完全無人排隊才做，若有排隊直接放棄）。</li>
+                            <li class="text-red-600 font-bold">2. 🔴 16:15 啟動撤退程序：廁所 ➔ 領回物品 ➔ 9 人集合 ➔ 步行回停車場 ➔ 3 名兒童安全座椅確認 ➔ 2 車點名。</li>
+                            <li class="text-red-600 font-bold">3. 🔴 16:40 最晚發車北上。</li>
                         </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=沖繩世界" target="_blank" rel="noopener noreferrer" class="block text-center bg-yellow-100 text-yellow-800 font-bold py-2 rounded-xl border border-yellow-200 text-xs hover:bg-yellow-200 transition-colors">
-                            <i class="fa-solid fa-gem mr-1"></i> 沖繩世界導航
+                        <a href="https://www.google.com/maps/search/?api=1&query=沖繩世界" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors">
+                            <i class="fa-solid fa-users mr-1"></i> 沖繩世界導航
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 16:55-17:20 步行與發車 -->
-            <div class="relative mb-8 pl-6">
-                <div class="timeline-node bg-red-500"></div>
-                <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-red-500 bg-red-50/30">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-red-700 font-bold bg-red-100 px-2.5 py-0.5 rounded text-xs">16:55 - 17:20</span>
-                            <span class="text-[11px] font-bold text-red-600 border border-red-200 px-2 py-0.5 rounded">🔴 發車防線</span>
-                        </div>
-                        <p class="text-xs text-gray-800 mb-3"><strong>🚶 穿越王國村 ＆ 🔴 17:20 發車北上：</strong><br>推推車、牽小孩預留 25 分鐘漫步走回大門口與停車場。🔴 17:20 全員上車，2 台車準時發車北上。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 17:20-18:35 迎擊車潮 -->
+            <!-- 16:40-18:30 北上名護 & 伊芸SA -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://lh3.googleusercontent.com/d/1nBXybga9EiYG9kOQjW_YK_dMGFCG7EjS" class="w-full h-full object-cover" alt="沖繩高速公路" onerror="this.src='https://placehold.co/800x400/0284c7/ffffff?text=高速公路北上名護'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🚗 迎擊週五車潮</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🚗 無壓北上 ＆ 伊芸SA 強制休息</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">17:20 - 18:35</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">16:40 - 18:30</span>
+                            <span class="text-[11px] font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded">🛑 拒絕疲勞駕駛</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-2">北上那霸至西原路段易塞（預估 1.5–2 小時）。車上享用點心，老小補眠。</p>
+                        <p class="text-xs text-gray-600 mb-2"><strong>【零預約壓力】</strong> 迎接週五下班車潮。2 車獨立導航，絕不在國道刻意減速等車。</p>
+                        <p class="text-xs text-red-600 font-bold mb-3">🛑 中途強制停靠【伊芸休息站】 15 分鐘，司機洗臉醒腦、全體如廁、小孩下車透氣，拒絕疲勞駕駛。</p>
+                        <p class="text-[11px] text-sky-800 bg-sky-50 p-2 rounded-lg border border-sky-100"><strong>預估抵達情境：</strong>順暢約 18:00｜正常 18:15–18:30｜明顯塞車 18:45。</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 18:35-18:50 伊芸 SA -->
-            <div class="relative mb-8 pl-6">
-                <div class="timeline-node bg-red-500"></div>
-                <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-red-500 bg-red-50">
-                    <div class="p-4">
-                        <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-red-700 font-bold bg-red-100 px-2.5 py-0.5 rounded text-xs">18:35 - 18:50</span>
-                            <span class="text-[11px] font-bold text-red-700 border border-red-300 px-2 py-0.5 rounded bg-red-100">🛑 強制休息</span>
-                        </div>
-                        <p class="text-xs text-gray-800 font-bold mb-1.5">🛑 【伊芸 SA（下り）強制休息】</p>
-                        <p class="text-xs text-gray-600 mb-3">2 車約於此時抵達，強制停靠休息 15 分鐘：司機洗臉醒腦、全體如廁、小孩透氣。</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=伊芸SA下り" target="_blank" rel="noopener noreferrer" class="block text-center bg-red-100 text-red-800 font-bold py-2 rounded-xl border border-red-200 text-xs hover:bg-red-200 transition-colors">
-                            <i class="fa-solid fa-parking mr-1"></i> 伊芸 SA(下り) 導航
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 19:30-19:50 抵達飯店 -->
+            <!-- 18:30-19:00 Check-in -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
-                        <img src="https://lh3.googleusercontent.com/d/1RqdQ9FUtEJcGNojkR09YeW5M7cjzsO3x" class="w-full h-full object-cover" alt="名護櫻之家飯店" onerror="this.src='https://placehold.co/800x400/0284c7/ffffff?text=名護櫻之家飯店'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🏨 抵達飯店 ＆ 獨立辦理 Check-in</span>
+                        <img src="https://lh3.googleusercontent.com/d/1RqdQ9FUtEJcGNojkR09YeW5M7cjzsO3x" class="w-full h-full object-cover" alt="名護海灘" onerror="this.src='https://placehold.co/800x400/0284c7/ffffff?text=名護櫻之家飯店'">
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🏨 抵達名護 ＆ 獨立辦理 Check-in</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">19:30 - 19:50</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">18:30 - 19:00</span>
+                            <span class="text-[11px] font-bold text-red-600 border border-red-200 px-2 py-0.5 rounded">🔴 護照自管</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-3"><strong class="text-red-600">🔴 護照自管：</strong>各房代表持隨身護照至櫃檯完成入住手續，放下行李換穿輕便服裝。</p>
+                        <p class="text-xs text-gray-600 mb-3"><strong class="text-red-600">🔴 各車持乘員護照獨立辦理入住，嚴禁一人代管全車護照。</strong> 提行李回房放妥。</p>
                         <a href="https://www.google.com/maps/search/?api=1&query=名護櫻之家飯店" target="_blank" rel="noopener noreferrer" class="block text-center bg-blue-600 text-white font-bold py-2 rounded-xl text-xs hover:bg-blue-700 transition-colors shadow-sm">
                             <i class="fa-solid fa-hotel mr-1"></i> 名護櫻之家導航
                         </a>
@@ -367,24 +344,17 @@
                 </div>
             </div>
 
-            <!-- 19:50-20:50 A&W 晚餐 -->
+            <!-- 19:00-20:00 A&W 晚餐 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-cyan-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-cyan-500">
-                    <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
-                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="A&W漢堡" onerror="this.src='https://placehold.co/800x400/0284c7/ffffff?text=A%26W漢堡'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🍔 徒步晚餐：A&W 漢堡 ＆ 順手採買</span>
-                    </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">19:50 - 20:50</span>
+                            <span class="text-cyan-700 font-bold bg-cyan-50 px-2.5 py-0.5 rounded text-xs">19:00 - 20:00</span>
                         </div>
-                        <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. 全家輕鬆步行 2 分鐘至 A&W 名護店 悠閒吃晚餐。</li>
-                            <li>2. 順路到旁邊的 Big 1 或 Kanehide 採買 Day 2 早晨飲水。</li>
-                        </ul>
-                        <p class="text-xs text-gray-600 pt-2 border-t border-gray-100"><strong>20:50 起：</strong>吃飽步行回飯店看海休息，洗澡梳洗，為 Day 2 充飽體力。</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=A&W名護店" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors mt-3">
+                        <p class="text-xs text-gray-800 font-bold mb-1.5">🍔 徒步晚餐：A&W 漢堡 ＆ 順手採買</p>
+                        <p class="text-xs text-gray-600 mb-3">全家輕鬆步行 2 分鐘至 A&W 名護店 悠閒吃晚餐。順路到旁邊的 Big 1 或 Kanehide 採買 Day 2 早晨飲水。<br><br><strong>20:30 起</strong>：吃飽步行回飯店看海休息，無需再安排其他購物行程，各自洗澡梳洗，為 Day 2 早起充飽體力。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=A&W名護店" target="_blank" rel="noopener noreferrer" class="block text-center bg-cyan-50 text-cyan-700 font-bold py-2 rounded-xl border border-cyan-200 text-xs hover:bg-cyan-100 transition-colors">
                             <i class="fa-solid fa-burger mr-1"></i> A&W 名護店導航
                         </a>
                     </div>
@@ -393,6 +363,7 @@
         </div>
     </div>
 
+    <!-- STREAMING_CHUNK:Rendering Day 2 -->
     <!-- ==================== Day 2 ==================== -->
     <div id="day2" class="day-content hidden reveal">
         <h2 class="text-2xl font-black text-teal-900 mb-4 flex items-center leading-tight">
@@ -626,7 +597,7 @@
                                 <span class="text-green-700 font-bold bg-green-50 px-2.5 py-0.5 rounded text-xs">14:50 - 15:50</span>
                                 <span class="text-[11px] font-bold text-green-700 border border-green-200 px-2 py-0.5 rounded">上限 60 分鐘</span>
                             </div>
-                            <p class="text-xs text-gray-600 mb-3">判斷狀態良好才前往，車程約 15 分鐘（若從海邦丸出發僅需 7–8 分鐘）。租借 4 人座協力車，林蔭遮陽穿梭綠色隧道，控制在 60 分鐘內。</p>
+                            <p class="text-xs text-gray-600 mb-3">判斷狀態良好才前往，車程約 15 分鐘（若從海邦丸出發僅需 7–8 分鐘）。租借 2 台 4 人座協力車，林蔭遮陽穿梭綠色隧道，控制在 60 分鐘內。</p>
                             <a href="https://www.google.com/maps/search/?api=1&query=備瀨福木林道" target="_blank" rel="noopener noreferrer" class="block text-center bg-green-50 text-green-700 font-bold py-2 rounded-xl border border-green-200 text-xs hover:bg-green-100 transition-colors">
                                 <i class="fa-solid fa-bicycle mr-1"></i> 備瀨福木林道導航
                             </a>
@@ -870,10 +841,11 @@
         </div>
     </div>
 
+    <!-- STREAMING_CHUNK:Rendering Day 3 -->
     <!-- ==================== Day 3 ==================== -->
     <div id="day3" class="day-content hidden reveal">
         <h2 class="text-2xl font-black text-blue-900 mb-4 flex items-center leading-tight">
-            <i class="fa-solid fa-water mr-3 text-blue-600"></i>Day 3｜9/27 (日) 美麗海水族館【實戰避暑＋達人攻略】➔ 傍晚 燒肉本部牧場
+            <i class="fa-solid fa-water mr-3 text-blue-600"></i>Day 3｜9/27 (日) 美麗海水族館【實戰避暑＋達人攻略終極版】➔ 傍晚直奔 燒肉本部牧場
         </h2>
 
         <!-- 核心原則 Card -->
@@ -882,10 +854,10 @@
                 <i class="fa-solid fa-star text-yellow-500 mr-2"></i>🌟 家庭旅遊核心原則
             </h3>
             <ul class="text-xs text-gray-700 space-y-2 mb-3">
-                <li><strong class="text-blue-800">1. 全日 3 個觀賞集合點 ＋ 1 個撤退點：</strong>【09:30 鬼蝠魟、11:15 劇場到位、14:40 鯨鯊卡位】；另設【15:35 吹哨撤退點】。其餘時間允許自由漫遊，不追求全團同步。</li>
-                <li><strong class="text-blue-800">2. 早鳥雙軌分流（Ocean Blue 特等席解套）：</strong>第 1 車先鋒衝刺抽 1F 景觀指定席（搶到賺到，無則免）；第 2 車主力 09:20 大水槽正前方就位。09:30 同步看魟魚進食，10:00 門口無縫會合。</li>
-                <li><strong class="text-blue-800">3. 達人視角升級：</strong>10:00 搭專用電梯俯瞰「黑潮探險」水槽頂部步道；15:00 鯨鯊垂直餵食改站大水槽後方「斜坡走道／階梯高處」，長輩坐著看、小孩不被擋。</li>
-                <li><strong class="text-blue-800">4. 避暑雙保險 ＆ 離館蓋章備援：</strong>11:30 Okichan 劇場大遮陽棚看海豚秀；中午於「美海廣場」吹冷氣野餐。10:45–11:00 前往戶外前手背務必蓋透明螢光章並保管好票根。</li>
+                <li><strong class="text-blue-800">1. 早鳥雙軌分流（Ocean Blue 特等席解套）：</strong>第 1 車先鋒衝刺抽 1F 景觀指定席（1,000日圓/40分），安排長輩/小小孩吹冷氣喝飲品；第 2 車主力 09:20 大水槽正前方就位。09:30 兩組隔玻璃同步看魟魚進食，10:00 門口原地無縫會合。</li>
+                <li><strong class="text-blue-800">2. 達人視角升級：</strong>10:00 搭專用電梯俯瞰「黑潮探險」水槽頂部；15:00 鯨鯊垂直餵食改站大水槽後方「斜坡走道／階梯高處」，長輩坐著看、小孩不被擋。</li>
+                <li><strong class="text-blue-800">3. 避暑雙保險 ＆ 離館蓋章備援：</strong>11:30 Okichan 劇場大遮陽棚看海豚秀；中午於「美海廣場」吹超強冷氣野餐。10:45/11:00 前往戶外前手背務必蓋透明螢光章並保管好票根，午後隨時可回館吹冷氣補看小展區。</li>
+                <li><strong class="text-blue-800">4. 鐵血防塞車與晚餐報到：</strong>15:35 吹哨撤退、16:10 P7 最晚發車；第一台抵達名護燒肉的車輛立即持單號 9ASHJD 報到保位。</li>
             </ul>
         </div>
         
@@ -912,7 +884,7 @@
                         <div class="flex justify-between items-center mb-1.5">
                             <span class="text-red-700 font-bold bg-red-50 px-2.5 py-0.5 rounded text-xs">08:00 - 08:45</span>
                         </div>
-                        <p class="text-xs text-gray-600">1. 飯店早餐 07:00 開始享用吃飽。<br>2. 🔴 08:10 準時 2 車出發（預留週日 449 縣道車流緩衝，車程約 35 分鐘）。</p>
+                        <p class="text-xs text-gray-600">早餐 07:00 開始享用。08:00 集合、08:10 準時 2 車出發（預留週日 449 縣道車流緩衝，車程約 35 分鐘）。</p>
                     </div>
                 </div>
             </div>
@@ -924,12 +896,12 @@
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
                             <span class="text-red-700 font-bold bg-red-50 px-2.5 py-0.5 rounded text-xs">08:45 - 09:25</span>
-                            <span class="text-[11px] font-bold text-sky-800 bg-sky-50 px-2 py-0.5 rounded">🔴 直切大水槽</span>
+                            <span class="text-[11px] font-bold text-sky-800 bg-sky-50 px-2 py-0.5 rounded">🔴 停車與大水槽分流</span>
                         </div>
-                        <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                        <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
                             <li>1. 2 車停妥 P7 北立體停車場。</li>
-                            <li class="text-sky-700 font-bold">2. 🏃 第 1 車（先鋒衝刺）：直下 1F Ocean Blue 抽景觀席號碼牌（若無則回大水槽會合，零挫折感）。</li>
-                            <li>3. 🚶 第 2 車（悠閒主力）：如廁後下樓，09:20 於大水槽正面就位。</li>
+                            <li class="text-red-600 font-bold">2. 🏃 第 1 車（先鋒衝刺）：直下 1F Ocean Blue 抽景觀席號碼牌（若無則回大水槽會合，零挫折感）。</li>
+                            <li class="text-blue-700 font-bold">3. 🚶 第 2 車（悠閒主力）：如廁後下樓，09:20 於大水槽正面就位。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=海洋博公園+P7立體停車場" target="_blank" rel="noopener noreferrer" class="block text-center bg-blue-50 text-blue-700 font-bold py-2 rounded-xl border border-blue-200 text-xs hover:bg-blue-100 transition-colors">
                             <i class="fa-solid fa-square-parking mr-1"></i> P7北立體停車場導航
@@ -944,7 +916,7 @@
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-blue-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://lh3.googleusercontent.com/d/1oMWXsSsf6r6N7O3399zscRET0py6Z_OI" class="w-full h-full object-cover" alt="鬼蝠魟" onerror="this.src='https://placehold.co/800x400/2563eb/ffffff?text=黑潮之海鬼蝠魟'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">⭐ 09:30 鬼蝠魟餵食解說【集合①】</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">⭐ 09:30 鬼蝠魟餵食解說【觀賞集合點①】</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
@@ -971,14 +943,11 @@
                             <li>1. 10:00 咖啡廳限時結束，自駕組 9 人於門口會合。</li>
                             <li>2. 搭乘「專用電梯」直達頂部步道，俯瞰水槽（免預約開放至 10:45）。</li>
                         </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=美麗海水族館" target="_blank" rel="noopener noreferrer" class="block text-center bg-green-50 text-green-700 font-bold py-2 rounded-xl border border-green-200 text-xs hover:bg-green-100 transition-colors">
-                            <i class="fa-solid fa-elevator mr-1"></i> 美麗海水族館導航
-                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 10:45-11:15 離館蓋章與移動 -->
+            <!-- 10:45-11:15 離館蓋章 ＆ 移步海豚劇場 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-blue-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-yellow-500">
@@ -987,7 +956,7 @@
                             <span class="text-yellow-700 font-bold bg-yellow-50 px-2.5 py-0.5 rounded text-xs">10:45 - 11:15</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. 10:45–11:00 離館，⚠️ 出館務必蓋透明螢光手章並收妥票根，如廁整補。</li>
+                            <li class="text-red-600 font-bold">1. 10:45–11:00 離館，⚠️ 出館務必蓋透明螢光手章並收妥票根，如廁整補。</li>
                             <li>2. 11:00–11:15 悠閒步行，11:15 劇場到位找相連遮陽座位。</li>
                         </ul>
                     </div>
@@ -1000,7 +969,7 @@
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-blue-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://lh3.googleusercontent.com/d/19rm7jw0t87X0XCL5XugBp-k6OE_C_FNz" class="w-full h-full object-cover" alt="海豚秀" onerror="this.src='https://placehold.co/800x400/2563eb/ffffff?text=海豚劇場表演'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🐬 ⭐ 11:30 海豚秀【集合②】</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🐬 ⭐ 11:30 海豚劇場到位＋觀賞【觀賞集合點②】</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
@@ -1023,7 +992,7 @@
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-sky-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://lh3.googleusercontent.com/d/1fmKHUElJm0AkqwEOB8QzvOudiY1v-ziK" class="w-full h-full object-cover" alt="美海廣場休息" onerror="this.src='https://placehold.co/800x400/2563eb/ffffff?text=美海廣場室內休息'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🍱 🟡 午餐避峰 ＆ 冷氣野餐</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🍱 🟡 午餐避峰 ＆ 美海廣場冷氣野餐</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
@@ -1051,7 +1020,7 @@
                         <p class="text-xs text-gray-800 font-bold mb-1.5">🟢 戶外海龜海牛 ＆ 憑手章自由漫遊</p>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
                             <li>1. 順路參觀戶外海龜館、海牛館。</li>
-                            <li>2. 憑手章與票根重新入館，2–4 人小組自由漫遊補看「珊瑚礁、觸摸池」等展區。</li>
+                            <li>2. 憑手章與票根重新入館，2–4 人自由漫遊補看「珊瑚礁、觸摸池」等展區。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=海龜館" target="_blank" rel="noopener noreferrer" class="block text-center bg-blue-50 text-blue-700 font-bold py-2 rounded-xl border border-blue-200 text-xs hover:bg-blue-100 transition-colors">
                             <i class="fa-solid fa-water-ladder mr-1"></i> 海龜館導航
@@ -1066,7 +1035,7 @@
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-blue-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://lh3.googleusercontent.com/d/1c8lcyk-bazPY1foaXNfcE5cg1TmWKr5P" class="w-full h-full object-cover" alt="鯨鯊秀" onerror="this.src='https://placehold.co/800x400/2563eb/ffffff?text=鯨鯊餵食解說'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🐋 ⭐ 15:00 鯨鯊垂直餵食【卡位③】</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🐋 ⭐ 15:00 鯨鯊垂直餵食【觀賞集合/卡位點③】</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
@@ -1092,7 +1061,6 @@
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
                             <span class="text-green-700 font-bold bg-green-50 px-2.5 py-0.5 rounded text-xs">15:20 - 15:35</span>
-                            <span class="text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">🔴 15:35 吹哨撤退</span>
                         </div>
                         <p class="text-xs text-gray-600 mb-3"><strong class="text-green-800">🟢 補水／如廁／集合：</strong>拍照留念、分批如廁；🔴 15:35 準時吹哨【撤退節點】，全團拔營往 P7 移動。</p>
                         <a href="https://www.google.com/maps/search/?api=1&query=美麗海水族館" target="_blank" rel="noopener noreferrer" class="block text-center bg-blue-50 text-blue-700 font-bold py-2 rounded-xl border border-blue-200 text-xs hover:bg-blue-100 transition-colors">
@@ -1145,11 +1113,11 @@
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
                             <span class="text-red-700 font-bold bg-red-50 px-2.5 py-0.5 rounded text-xs">17:20 - 17:45</span>
-                            <span class="text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">🔴 首車絕對保位</span>
+                            <span class="text-[11px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">🔴 先遣策略</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1 mb-3">
                             <li>1. 17:20–17:30 陸續抵達燒肉店停車場。</li>
-                            <li class="font-bold text-orange-700">2. 🥇 第一台抵達的車輛立即派代表入店，出示單號 9ASHJD 報到保位（事前オーダー已完成）。</li>
+                            <li>2. 🥇 第一台抵達的車輛立即派代表入店，出示單號 9ASHJD 報到保位（事前オーダー已完成）。</li>
                             <li class="text-red-600 font-bold">3. 🔴 17:35 確保全團 12 人（含會合親屬）於餐廳前集合完成，17:45 準時入席。</li>
                         </ul>
                     </div>
@@ -1162,12 +1130,12 @@
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-blue-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://lh3.googleusercontent.com/d/1CQ8Vi1WFj-U4LA_xva2fnUd5U0KTvq99" class="w-full h-full object-cover" alt="燒肉本部牧場" onerror="this.src='https://placehold.co/800x400/dc2626/ffffff?text=燒肉本部牧場名護店'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🥩 ⭐ 晚餐：燒肉本部牧場 名護店</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">🥩 ⭐ 晚餐：燒肉本部牧場 名護店（核心）</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
                             <span class="text-blue-700 font-bold bg-blue-50 px-2.5 py-0.5 rounded text-xs">17:45 - 19:45</span>
-                            <span class="text-[11px] font-mono bg-red-100 text-red-800 px-2 py-0.5 rounded font-bold">單號 9ASHJD</span>
+                            <span class="text-[11px] font-mono bg-red-100 text-red-800 px-2 py-0.5 rounded font-bold">預約單號 9ASHJD</span>
                         </div>
                         <p class="text-xs font-bold text-red-600 mb-1">【全團 12 人核心大餐】</p>
                         <p class="text-xs text-gray-600 mb-3">享受頂級本部牛與和牛燒肉盛宴。</p>
@@ -1196,6 +1164,7 @@
         </div>
     </div>
 
+    <!-- STREAMING_CHUNK:Rendering Day 4 -->
     <!-- ==================== Day 4 ==================== -->
     <div id="day4" class="day-content hidden reveal">
         <h2 class="text-2xl font-black text-indigo-900 mb-4 flex items-center leading-tight">
@@ -1206,26 +1175,26 @@
         <div class="glass-card rounded-2xl p-4 mb-6 border-l-8 border-l-indigo-600 shadow-sm">
             <div class="flex items-center justify-between mb-2 border-b pb-2">
                 <h3 class="font-black text-indigo-950 text-sm md:text-base flex items-center">
-                    <span class="text-lg mr-1.5">🐧</span> 【DMM 動物體驗券【3 機齊發秒搶】＆ 雙方案備援】
+                    <span class="text-lg mr-1.5">🐧</span> 【DMM 動物體驗券【3 機同步搶票】＆ 雙方案備援】
                 </h3>
             </div>
             
             <p class="text-xs text-gray-700 leading-relaxed mb-3">
-                <strong class="text-indigo-800">實測機制確認：</strong>系統限制「一次最多 1 個」，因此絕不能單機買多張。<br>
-                <strong class="text-indigo-800">搶票原則（3 機齊發・3 位小孩優先）：</strong><br>
+                <strong class="text-indigo-800">實測機制確認：</strong>系統限制「一次最多 1 個」，需以 3 支手機分別嘗試購買。<br>
+                <strong class="text-indigo-800">搶票原則（自駕組 3 位小孩優先）：</strong><br>
                 第一目標：鎖定 14:30 企鵝餵食體驗（14:30～14:55，¥1,000）。<br>
-                <strong class="text-red-600">事前防禦（Day 3 晚間完成）：</strong>指定 3 位大人，務必於前晚先下載好 DMM 官方 App，完成註冊並提前綁定好可收海外簡訊驗證碼的信用卡。<br>
-                <strong class="text-indigo-800">執行方式：</strong>09:00 3 支手機同時各搶 1 張。3 位小孩均參加，小學三年級以下由成人免費陪同。
+                <strong class="text-red-600">事前防禦：</strong>前晚指定 3 位大人先下載好 DMM 官方 App，完成註冊並綁定可收海外簡訊之信用卡。<br>
+                <strong class="text-indigo-800">執行方式：</strong>09:00–09:05 3 支手機同步嘗試搶購各 1 張（若會合親屬要參加，請對方自行備機同步搶票）。實際張數依當日餘票為準。
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs mb-3">
                 <div class="bg-indigo-50/80 p-2.5 rounded-xl border border-indigo-100">
-                    <div class="font-bold text-emerald-700 mb-1">🟢 3 機全數成功</div>
+                    <div class="font-bold text-emerald-700 mb-1">🟢 全數成功</div>
                     按【原方案】執行（14:20 企鵝區集合）。
                 </div>
                 <div class="bg-indigo-50/80 p-2.5 rounded-xl border border-indigo-100">
-                    <div class="font-bold text-red-700 mb-1">🔴 名額已滿或未搶齊</div>
-                    自動啟動【備案 B：輕鬆互動與擴大採買】，免排隊等候，提早出館悠閒逛商場。
+                    <div class="font-bold text-red-700 mb-1">🔴 未達預期數量</div>
+                    09:05 前自動啟動【備案 B：輕鬆互動與擴大採買】。
                 </div>
             </div>
 
@@ -1247,7 +1216,7 @@
                         <tr class="bg-indigo-50/90 text-indigo-950 border-b border-indigo-100">
                             <th class="p-2.5 font-bold w-24 border-r border-indigo-100">時間</th>
                             <th class="p-2.5 font-bold bg-emerald-50/90 text-emerald-950 border-r border-indigo-100">⭐ 原方案：成功取得企鵝餵食（推薦 ⭐⭐⭐⭐⭐）</th>
-                            <th class="p-2.5 font-bold bg-amber-50/90 text-amber-950">⭐ 備案 B：未取得餵食券・輕鬆互動與擴大採買（備案 ⭐⭐⭐⭐）</th>
+                            <th class="p-2.5 font-bold bg-amber-50/90 text-amber-950">⭐ 備案 B：未取得餵食券・擴大採買（備案 ⭐⭐⭐⭐）</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-gray-700">
@@ -1256,19 +1225,19 @@
                             <td class="p-2.5 border-r border-gray-100">
                                 🍳 <strong>早餐、3機搶票 ＆ 📦 09:10 裝載行李：</strong><br>
                                 1. 08:00 享用飯店早餐。<br>
-                                2. 09:00 3 支手機同步秒搶 DMM 體驗券（每機各搶 1 張）。<br>
+                                2. 09:00 3 支手機同步搶 DMM 體驗券（每機最多 1 張）。<br>
                                 3. 📦 <strong>【🔴 09:10 空間俄羅斯方塊紅線】</strong>司機務必提早將膨脹的大行李搬上車排列定位，避免出發時塞車延誤。
                             </td>
                             <td class="p-2.5 bg-amber-50/20">同左（享用早餐、09:10 提早裝載大行李上車）。</td>
                         </tr>
                         <tr>
                             <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">09:00 - 09:05</td>
-                            <td class="p-2.5 border-r border-gray-100 text-indigo-900 font-bold">📱 3 支手機各自搶購 14:30 企鵝餵食券 1 張成功（共 3 張），截圖保存。</td>
-                            <td class="p-2.5 bg-amber-50/20 text-red-700 font-bold">📱 若 09:02 發現額滿，家族群組回報啟動備案 B。</td>
+                            <td class="p-2.5 border-r border-gray-100 text-indigo-900 font-bold">📱 3 支手機各自嘗試搶購 14:30 企鵝券 1 張。</td>
+                            <td class="p-2.5 bg-amber-50/20 text-red-700 font-bold">📱 若 09:05 前確認未達預期，回報啟動備案 B。</td>
                         </tr>
                         <tr>
                             <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">09:30 - 11:00</td>
-                            <td class="p-2.5 border-r border-gray-100">🚗 <strong>退房 ＆ 南下開車（90分鐘車程緩衝）：</strong>09:30 準時發車，走高速公路南下（若西原交流道接那霸高架遇殘餘車流，直接壓縮 iias 午餐時間，絕不影響後續行程）。</td>
+                            <td class="p-2.5 border-r border-gray-100">🚗 <strong>退房 ＆ 南下開車（90分鐘車程緩衝）：</strong>09:30 準時發車，走高速南下（若西原交流道遇殘餘車流，直接壓縮 iias 午餐時間，絕不影響後續行程）。</td>
                             <td class="p-2.5 bg-amber-50/20">同左（09:30 正常退房南下）。</td>
                         </tr>
                         <tr>
@@ -1284,67 +1253,68 @@
                         <tr>
                             <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">12:45 - 14:20</td>
                             <td class="p-2.5 border-r border-gray-100">DMM Kariyushi 水族館 主要參觀（沉浸式光影、透明玻璃步道、摸海星海膽）。</td>
-                            <td class="p-2.5 bg-amber-50/20">DMM 水族館全館悠閒漫遊（體驗空中玻璃步道、海洋觸摸池、虛擬海洋光影打卡）。</td>
+                            <td class="p-2.5 bg-amber-50/20">DMM 水族館全館悠閒漫遊（體驗海洋光影打卡）。</td>
                         </tr>
                         <tr>
                             <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">14:20 - 15:25</td>
                             <td class="p-2.5 border-r border-gray-100 bg-emerald-50/40 font-semibold text-emerald-950">
-                                🐧 14:20 企鵝區集合 ➔ 14:30–14:50 3位小孩企鵝餵食（大人拍照） ➔ 14:50–15:25 iias 1F Foodway 超市衝刺採買：<br><br>
-                                • <strong>【分流採買】</strong> 僅派 2-3 名大人快速採買伴手禮與飲料（亦可直接預買晚間機場便當/壽司/麵包・方案B），長輩與小孩找座位休息。
+                                🐧 14:20 企鵝區集合 ➔ 14:30–14:50 小孩餵食（大人拍照） ➔ 14:50–15:25 iias 1F Foodway 衝刺採買：<br><br>
+                                • <strong>【分流採買】</strong> 僅派 2-4 大人採買伴手禮與飲料（亦可預買晚間機場便當・方案B），長輩與小孩找座位休息。
                             </td>
                             <td class="p-2.5 bg-amber-50/40 font-semibold text-amber-950">
-                                🛍️ 14:20–15:25 充裕採買（多出 40 分鐘！）：全家於 iias Foodway 超市與伴手禮名店街從容採買，長輩在咖啡廳休息。
+                                🛍️ 14:20–15:25 充裕採買（多出 40 分鐘！）：全家於 iias Foodway 超市與名店街從容採買，長輩在咖啡廳休息。
                             </td>
                         </tr>
                         <tr>
                             <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">15:25 - 15:40</td>
                             <td class="p-2.5 border-r border-gray-100">
-                                📦 <strong>【🔴 15:30 鐵血採買截止線 ＆ 寬膠帶封箱加固】：</strong><br>
-                                1. 🔴 15:25 開始收尾，15:30 絕對停止採買（嚴禁「再逛5分鐘」）。<br>
-                                2. 📦 15:30–15:40 執行全員人頭、隨身包、護照、各車行李大清點，使用自備寬版透明封箱膠帶，於紙箱頂部與底部打「王字型」或「十字型」加固作為託運。
+                                📦 <strong>【🔴 15:25 收尾 ＆ 15:30 採買截止 ＆ 全面大清點】：</strong><br>
+                                1. 15:25 準備收尾，🔴 15:30 絕對停止採買（嚴禁「再逛5分鐘」）。<br>
+                                2. 📦 15:30–15:40 執行人頭、護照、手機、隨身包、水壺與各車行李配置全面大清點。<br>
+                                3. 使用自備之寬版透明封箱膠帶，於紙箱頂底打「王字型」或「十字型」加固託運。
                             </td>
-                            <td class="p-2.5 bg-amber-50/20">同左（15:30 鐵血停止採買，大清點與封箱）。</td>
+                            <td class="p-2.5 bg-amber-50/20">同左（15:25 收尾、15:30 停止採買，15:30–15:40 全員清點＋寬膠帶加固紙箱）。</td>
                         </tr>
                         <tr>
-                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">15:45 - 16:15</td>
+                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">15:40 - 16:15</td>
                             <td class="p-2.5 border-r border-gray-100 text-red-700 font-bold">
-                                🚗 離開 iias ➔ 各自前往 OTS 旁加油站加滿油（獨立導航不集結）：<br>
-                                1. 15:45 準時發車駛離 iias。<br>
-                                2. 2 車獨立開往 ENEOS 加油站，人工加油說出「Regular, Mantan (加滿)」，各車司機拿取滿油收據（領収書）在手上，切勿丟棄。<br>
+                                🚗 離開 iias ➔ 前往 OTS 旁加油站加滿油（15:40 準時發車）：<br>
+                                1. 15:40 準時發車駛離 iias。<br>
+                                2. 2 台車獨立開往 ENEOS 加油站，告知店員「Regular, full tank」，依 OTS 要求保留加油收據（領収書）備查。<br>
                                 3. 加完油的車輛直接導航前往 OTS 營業所，絕不在加油站等候集結。
                             </td>
-                            <td class="p-2.5 bg-amber-50/20 text-red-700 font-bold">同左（15:45 發車，獨立加油並前往 OTS）。</td>
+                            <td class="p-2.5 bg-amber-50/20 text-red-700 font-bold">同左（15:40 發車，獨立加油並前往 OTS）。</td>
                         </tr>
                         <tr>
-                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">16:30 - 16:50</td>
+                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">16:15 - 17:00</td>
                             <td class="p-2.5 border-r border-gray-100 bg-emerald-50/60">
-                                🟢 <strong>OTS 豐崎營業所 還車分工 ＆ 搭乘最近班次接駁車：</strong><br>
-                                1. 駕駛：駛入還車道，出示加油收據完成還車驗收，並拔出 ETC 卡交給櫃檯結清 4 天過路費。<br>
-                                2. 其他人：行李先下車、集中推至接駁車候車區。<br>
-                                3. 全員搭乘最近一班的 OTS 機場免費接駁巴士出發。
+                                🟢 <strong>OTS 豐崎營業所 還車分工 ＆ 搭乘接駁車：</strong><br>
+                                1. 16:15–16:30 抵達 OTS，16:30–16:50 完成還車。<br>
+                                2. 駕駛：駛入還車道，出示加油收據完成驗收，並拔出 ETC 卡交給櫃檯結帳。<br>
+                                3. 其他人：行李集中推至接駁車候車區。<br>
+                                4. 全員搭乘最近一班接駁巴士出發，把 17:00 視為最晚出發線。
                             </td>
                             <td class="p-2.5 bg-emerald-50/60">同左（分工作業完成還車驗收與搭上接駁車）。</td>
                         </tr>
                         <tr>
-                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">17:15 起</td>
+                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">17:15 - 19:55</td>
                             <td class="p-2.5 border-r border-gray-100">
                                 🧳 <strong>抵達機場 ＆ 【基地營建立 ＆ 晚餐雙方案】：</strong><br>
-                                1. 接駁車抵達國際線 1 樓，搭大電梯直上 國際線 3 樓出境大廳。<br>
-                                2. 🏕️ <strong>建立基地營 (17:15–18:00)：</strong>在 3 樓找座椅，長輩小孩休息整理。<br>
-                                3. 🍱 <strong>晚餐分流執行（二選一）：</strong><br>
+                                1. 抵達後直上 國際線 3 樓出境大廳，🏕️ 建立基地營。<br>
+                                2. 🍱 <strong>晚餐分流（二選一）：</strong><br>
                                 &nbsp;&nbsp;&nbsp;• 方案 A（推薦・提早採買）：17:15 基地營一成立，採買組立即前往國內線 2 樓買豬肉蛋飯糰/便當，18:00 前帶回基地營吃完。<br>
-                                &nbsp;&nbsp;&nbsp;• 方案 B（最保險）：直接享用 15:00 於 iias 超市預買之便當壽司，徹底切斷奔波風險。<br>
-                                4. 🛫 <strong>辦理託運與通關出境 (18:25 開櫃後)：</strong>華航 CI123 一開櫃，全團立即優先辦理大行李與紙箱託運，隨後排隊進行安全檢查與證照查驗。
+                                &nbsp;&nbsp;&nbsp;• 方案 B（最保險）：直接享用 iias 預買之便當，切斷奔波風險。<br>
+                                3. 🛫 <strong>辦理託運與出境 (18:25 開櫃後)：</strong>華航 CI123 一開櫃，全團優先辦理大行李與紙箱託運。
                             </td>
                             <td class="p-2.5 bg-amber-50/20">同左（17:15 抵達建立基地營，執行晚餐方案 A/B，開櫃即刻優先託運）。</td>
                         </tr>
                         <tr>
-                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">通關後</td>
+                            <td class="p-2.5 font-mono font-bold border-r border-gray-100 bg-gray-50/50">19:55 - 20:25</td>
                             <td class="p-2.5 border-r border-gray-100">
                                 🛍️ <strong>提早登機防線 ＆ Gate 集合：</strong><br>
-                                1. 🔴 19:55 全團務必完成安檢通關、找到登機門附近。<br>
-                                2. 🔴 20:15 全團於登機門 Gate 集合完畢。<br>
-                                3. 20:30 等待登機／依華航實際廣播指示。
+                                1. 🔴 19:55–20:05 全團務必完成安檢通關、找到登機門附近。<br>
+                                2. 🔴 20:15 全團（含會合親屬共 12 人）於登機門 Gate 集合完畢。<br>
+                                3. 20:30 等待登機／依廣播指示。
                             </td>
                             <td class="p-2.5 bg-amber-50/20">同左（提早通關，20:15 登機門集合）。</td>
                         </tr>
@@ -1376,7 +1346,7 @@
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1 mb-3">
                             <li>1. 08:00 享用飯店早餐。</li>
-                            <li class="font-bold text-blue-700">2. 09:00 3 支手機同步秒搶 DMM 體驗券（每機各搶 1 張）。</li>
+                            <li class="font-bold text-blue-700">2. 09:00 3 支手機同步搶 DMM 體驗券（每機最多 1 張）。</li>
                             <li class="font-bold text-indigo-800">3. 📦 <strong>【🔴 09:10 空間俄羅斯方塊紅線】</strong>司機務必提早將膨脹的大行李搬上車排列定位，避免出發時塞車延誤。</li>
                         </ul>
                     </div>
@@ -1396,7 +1366,7 @@
                             <span class="text-indigo-700 font-bold bg-indigo-50 px-2.5 py-0.5 rounded text-xs">09:30 - 11:00</span>
                             <span class="text-xs text-gray-500 font-bold">90 分鐘車程緩衝</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-3">09:30 準時發車，飯店辦理退房，順向走高速公路直達南部 iias 豐崎商圈（若西原交流道接那霸高架遇殘餘車流，直接壓縮 iias 午餐時間，絕不影響後續行程）。</p>
+                        <p class="text-xs text-gray-600 mb-3">09:30 準時發車，飯店辦理退房，順向走高速南下（若西原交流道遇殘餘車流，直接壓縮 iias 午餐時間，絕不影響後續行程）。</p>
                         <a href="https://www.google.com/maps/search/?api=1&query=iias沖繩豐崎" target="_blank" rel="noopener noreferrer" class="block text-center bg-indigo-50 text-indigo-700 font-bold py-2 rounded-xl border border-indigo-200 text-xs hover:bg-indigo-100 transition-colors">
                             <i class="fa-solid fa-location-arrow mr-1"></i> 南下 iias 導航
                         </a>
@@ -1440,7 +1410,7 @@
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-indigo-700 font-bold bg-indigo-50 px-2.5 py-0.5 rounded text-xs">12:45 - 14:20</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-3">體驗空中透明玻璃步道、虛擬海洋光影打卡、海星海膽觸摸池。</p>
+                        <p class="text-xs text-gray-600 mb-3">體驗空中透明玻璃步道、海洋觸摸池摸海星海膽、沉浸式海洋光影打卡。</p>
                         <a href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi水族館" target="_blank" rel="noopener noreferrer" class="block text-center bg-indigo-50 text-indigo-700 font-bold py-2 rounded-xl border border-indigo-200 text-xs hover:bg-indigo-100 transition-colors">
                             <i class="fa-solid fa-fish mr-1"></i> DMM 水族館導航
                         </a>
@@ -1460,12 +1430,12 @@
                         <div class="flex justify-between items-center mb-1.5">
                             <span class="text-indigo-700 font-bold bg-indigo-50 px-2.5 py-0.5 rounded text-xs">14:20 - 15:25</span>
                         </div>
-                        <p class="text-xs text-gray-600 mb-3">若有餵食券，14:20 企鵝區集合（14:30 餵食）；隨後至 1F Foodway 超市衝刺採買。<br><br><strong>【分流採買】</strong> 僅派 2-3 名大人快速採買伴手禮與飲料（亦可直接預買晚間機場便當/壽司/麵包・方案B），長輩與小孩找座位休息。</p>
+                        <p class="text-xs text-gray-600 mb-3">若有餵食券，14:20 企鵝區集合（14:30 餵食）；隨後至 1F Foodway 超市衝刺採買。<br><br><strong>【分流採買】</strong> 僅派 2-4 名大人快速採買伴手禮與飲料（亦可預買晚間機場便當・方案B），長輩與小孩找座位休息。</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 15:25-15:40 採買收尾 ＆ 封箱大清點 -->
+            <!-- 15:25-15:40 採買收尾 ＆ 全面大清點 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-indigo-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-red-500">
@@ -1475,25 +1445,26 @@
                             <span class="text-xs font-mono bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded">🔴 15:30 停止採買</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1 mb-3">
-                            <li class="font-bold text-red-600">1. 🔴 15:25 開始收尾，15:30 絕對停止採買（嚴禁「再逛5分鐘」）。</li>
-                            <li class="font-bold text-indigo-900">2. 📦 15:30–15:40 執行全員人頭、隨身包、護照、各車行李大清點，使用自備寬版透明封箱膠帶，於紙箱頂部與底部打「王字型」或「十字型」加固作為託運。</li>
+                            <li class="font-bold text-red-600">1. 15:25 準備收尾，🔴 15:30 絕對停止採買（嚴禁「再逛5分鐘」）。</li>
+                            <li class="font-bold text-indigo-900">2. 📦 15:30–15:40 執行人頭、護照、手機、隨身包、水壺與各車行李配置全面大清點。</li>
+                            <li class="font-bold text-indigo-900">3. 使用自備之寬版透明封箱膠帶，於紙箱頂底打「王字型」或「十字型」加固託運。</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- 15:45-16:15 離開 iias ➔ 加油 -->
+            <!-- 15:40-16:15 離開 iias ➔ 加油 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-indigo-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-indigo-500">
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-indigo-700 font-bold bg-indigo-50 px-2.5 py-0.5 rounded text-xs">15:45 - 16:15</span>
-                            <span class="text-xs font-mono bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded">🔴 15:45 發車</span>
+                            <span class="text-indigo-700 font-bold bg-indigo-50 px-2.5 py-0.5 rounded text-xs">15:40 - 16:15</span>
+                            <span class="text-xs font-mono bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded">🔴 15:40 發車</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. 15:45 準時發車駛離 iias。</li>
-                            <li>2. 2 車獨立開往 ENEOS 加油站，人工加油說出「Regular, Mantan (加滿)」，各車司機拿取滿油收據（領収書）在手上，切勿丟棄。</li>
+                            <li>1. 15:40 準時發車駛離 iias。</li>
+                            <li>2. 2 台車獨立開往 ENEOS 加油站，告知店員「Regular, full tank」，<strong class="text-red-600">依 OTS 要求保留加油收據（領収書）備查</strong>。</li>
                             <li class="text-red-600 font-bold">3. 加完油的車輛直接導航前往 OTS 營業所，絕不在加油站等候集結。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=ENEOS+豐崎加油站" target="_blank" rel="noopener noreferrer" class="block text-center bg-indigo-50 text-indigo-700 font-bold py-2 rounded-xl border border-indigo-200 text-xs hover:bg-indigo-100 transition-colors">
@@ -1503,7 +1474,7 @@
                 </div>
             </div>
 
-            <!-- 16:30-16:50 OTS 還車 -->
+            <!-- 16:15-17:00 OTS 還車 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-indigo-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-indigo-500">
@@ -1513,12 +1484,13 @@
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
-                            <span class="text-indigo-700 font-bold bg-indigo-50 px-2.5 py-0.5 rounded text-xs">16:30 - 16:50</span>
+                            <span class="text-indigo-700 font-bold bg-indigo-50 px-2.5 py-0.5 rounded text-xs">16:15 - 17:00</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. <strong>駕駛：</strong>駛入還車道，出示加油收據完成還車驗收，並拔出 ETC 卡交給櫃檯結清。</li>
-                            <li>2. <strong>其他人：</strong>行李先下車、集中推至接駁車候車區。</li>
-                            <li class="font-bold text-indigo-800">3. 全員搭乘最近一班的 OTS 機場免費接駁巴士出發。</li>
+                            <li>1. 16:15–16:30 抵達 OTS，16:30–16:50 完成還車。</li>
+                            <li>2. <strong>駕駛：</strong>駛入還車道，出示加油收據完成驗收，並拔出 ETC 卡交給櫃檯結帳。</li>
+                            <li>3. <strong>其他人：</strong>行李集中推至接駁車候車區。</li>
+                            <li class="font-bold text-indigo-800">4. 全員搭乘最近一班接駁巴士出發，把 17:00 視為最晚出發線。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=OTS租車+臨空豐崎營業所" target="_blank" rel="noopener noreferrer" class="block text-center bg-indigo-50 text-indigo-700 font-bold py-2 rounded-xl border border-indigo-200 hover:bg-indigo-100 transition-colors text-xs">
                             <i class="fa-solid fa-car mr-1"></i> OTS 還車導航
@@ -1527,13 +1499,13 @@
                 </div>
             </div>
 
-            <!-- 17:15-19:55 抵達機場基地營 -->
+            <!-- 17:15 抵達機場基地營 -->
             <div class="relative mb-8 pl-6">
                 <div class="timeline-node bg-indigo-500"></div>
                 <div class="glass-card rounded-2xl overflow-hidden border-l-4 border-l-indigo-500">
                     <div class="h-32 sm:h-36 bg-gray-200 relative img-gradient">
                         <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="那霸機場離境" onerror="this.src='https://placehold.co/800x400/4338ca/ffffff?text=那霸機場國際線'">
-                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">✈️ 機場基地營建立與輪值確認</span>
+                        <span class="absolute bottom-2 left-4 text-white font-black text-base sm:text-lg z-10 drop-shadow-md">✈️ 機場基地營建立 ＆ 晚餐雙方案</span>
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-center mb-1.5">
@@ -1541,10 +1513,12 @@
                             <span class="text-[11px] font-mono bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">華航 CI123</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li>1. 搭大電梯直上 <strong>國際線 3 樓出境大廳</strong>。</li>
-                            <li class="font-bold text-indigo-800">2. 🏕️ 建立基地營：找一整排座椅，長輩小孩休息，指定成人定時確認櫃檯狀態。</li>
-                            <li>3. 🍱 外帶晚餐：派壯丁走聯絡通道至「國內線 2 樓」買豬肉蛋飯糰帶回吃。</li>
-                            <li>4. 🛫 華航一開櫃立即全團優先辦理大行李託運，隨後排隊安檢通關。通關後於免稅店補買伴手禮。</li>
+                            <li>1. 抵達後直上 <strong>國際線 3 樓出境大廳</strong>，🏕️ 建立基地營。</li>
+                            <li>2. 🍱 <strong>晚餐分流（二選一）：</strong><br>
+                                &nbsp;&nbsp;&nbsp;• <strong>方案 A（推薦・提早採買）：</strong>17:15 基地營一成立，採買組立即前往國內線 2 樓買豬肉蛋飯糰/便當，18:00 前帶回基地營吃完。<br>
+                                &nbsp;&nbsp;&nbsp;• <strong>方案 B（最保險）：</strong>直接享用 iias 預買之便當，切斷奔波風險。
+                            </li>
+                            <li>3. 🛫 <strong>辦理託運與出境 (18:25 開櫃後)：</strong>華航 CI123 一開櫃，全團優先辦理大行李與紙箱託運。</li>
                         </ul>
                         <a href="https://www.google.com/maps/search/?api=1&query=那霸機場" target="_blank" rel="noopener noreferrer" class="block text-center bg-indigo-600 text-white font-bold py-2 rounded-xl hover:bg-indigo-700 transition-colors text-xs">
                             <i class="fa-solid fa-plane-departure mr-1"></i> 那霸機場國際線導航
@@ -1563,9 +1537,9 @@
                             <span class="text-[11px] font-mono bg-red-100 text-red-800 px-2 py-0.5 rounded font-bold">🔴 提早登機防線</span>
                         </div>
                         <ul class="text-xs text-gray-600 space-y-1.5 mb-3">
-                            <li class="text-red-600 font-bold">1. 🔴 19:55 全團務必完成安檢通關、找到登機門附近。</li>
-                            <li class="text-red-600 font-bold">2. 🔴 20:15 全團於登機門 Gate 集合完畢。</li>
-                            <li>3. 20:30 等待登機／依華航實際廣播指示。</li>
+                            <li class="text-red-600 font-bold">1. 🔴 19:55–20:05 全團務必完成安檢通關、找到登機門附近。</li>
+                            <li class="text-red-600 font-bold">2. 🔴 20:15 全團（含會合親屬共 12 人）於登機門 Gate 集合完畢。</li>
+                            <li>3. 20:30 等待登機／依廣播指示。</li>
                         </ul>
                     </div>
                 </div>
@@ -1576,25 +1550,25 @@
         <!-- Day 4 行李分裝 ＆ 海關備忘錄 -->
         <div class="glass-card rounded-2xl p-4 border border-indigo-200 bg-white shadow-sm mt-6">
             <h3 class="font-black text-indigo-950 text-sm mb-3 flex items-center border-b pb-2">
-                <i class="fa-solid fa-suitcase-rolling text-indigo-600 mr-2"></i>🧳 Day 4 終極行李分裝 ＆ 海關嚴格守則
+                <i class="fa-solid fa-suitcase-rolling text-indigo-600 mr-2"></i>🧳 Day 4 終極行李分裝 ＆ 海關法規備忘錄
             </h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs mb-3">
                 <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    <div class="font-bold text-blue-700 mb-1">🧳 A 類：托運行李箱 (出發前先封箱)</div>
-                    大容量液體/凝膠/膏狀物（香檸原汁、石垣島辣油、果醬、布丁、泡盛辣椒、化妝水等，易碎玻璃瓶加強防撞包裹）、換洗衣物。
+                    <div class="font-bold text-blue-700 mb-1">🧳 A 類：託運行李箱（採買完打包封箱）</div>
+                    大容量液體/凝膠/膏狀物（香檸原汁、石垣島辣油、果醬、布丁、泡盛辣椒、化妝水等，易碎玻璃瓶加強防撞）、大型伴手禮盒、LOPIA 食品、換洗衣物。
                 </div>
                 <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200">
-                    <div class="font-bold text-amber-700 mb-1">📦 B 類：超市紙箱託運 (Foodway快速封箱)</div>
+                    <div class="font-bold text-amber-700 mb-1">📦 B 類：超市紙箱託運（Day 4 Foodway 快速封箱）</div>
                     超市購買之常溫伴手禮盒、餅乾零食、泡麵等，直接以超市紙箱膠帶封妥貼上行李條託運（最省時且最防撞）。
                 </div>
                 <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
-                    <div class="font-bold text-emerald-700 mb-1">🎒 C 類：隨身手提行李 (隨身攜帶)</div>
-                    護照正本、錢包、手機、<strong class="text-red-600">所有行動電源與相機鋰電池（嚴禁放托運/紙箱）</strong>、常備重要藥品、小孩安撫玩具/外套。
+                    <div class="font-bold text-emerald-700 mb-1">🎒 C 類：隨身手提行李（隨身攜帶上機）</div>
+                    護照正本、錢包、手機、<strong class="text-red-600">所有行動電源與相機鋰電池（嚴禁放托運行李箱與紙箱，封箱前務必最後確認）</strong>、常備個人重要藥品、小孩安撫玩具/薄外套。
                 </div>
                 <div class="bg-indigo-50 p-2.5 rounded-xl border border-indigo-200">
                     <div class="font-bold text-indigo-700 mb-1">🚗 D 類：車內下車前最後清空檢查</div>
-                    保溫水壺、手機充電線、車用垃圾、ETC 卡片、租車契約文件夾、該車滿油收據（建議先拍照）。
+                    保溫水壺、手機充電線、車用垃圾、ETC 卡片、租車契約透明文件夾、該車滿油收據（建議先拍照）。
                 </div>
             </div>
 
@@ -1607,6 +1581,7 @@
     </div>
 </main>
 
+<!-- STREAMING_CHUNK:Rendering Bottom Navigation -->
 <!-- 底部固定按鈕列 (4顆按鈕) -->
 <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-2.5 z-40 flex justify-around shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
     <button onclick="openModal('flightModal')" class="flex flex-col items-center text-cyan-700 w-1/4">
@@ -1632,6 +1607,7 @@
 
 <!-- ================= 彈出視窗 Modal 區域 ================= -->
 
+<!-- STREAMING_CHUNK:Rendering Modals -->
 <!-- 1. 航班資訊 Modal -->
 <div id="flightModal" class="modal">
     <div class="modal-content">
@@ -1771,30 +1747,22 @@
             <button onclick="closeModal('carModal')" class="text-gray-400 hover:text-gray-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
-        <h4 class="font-bold text-gray-800 text-xs mb-2"><i class="fa-solid fa-users text-teal-600 mr-1.5"></i>【車輛編組 ＆ 汽座配置 (自駕主力：2 車 9 人)】</h4>
+        <h4 class="font-bold text-gray-800 text-xs mb-2"><i class="fa-solid fa-users text-teal-600 mr-1.5"></i>【自駕主力：2 車 9 人】</h4>
         <div class="space-y-2 mb-4">
             <div class="bg-gray-50 p-2.5 rounded-xl text-xs border-l-4 border-teal-500">
                 <strong class="text-teal-900">1 號車（｜HSU PANG-WEI）</strong><br>
                 <span class="text-gray-600">乘客：HSU PANG-WEI、CHOU YU-WEN、女童（8歲）、男童（6歲） ➔ <strong>共 4 人</strong></span><br>
-                <span class="text-[11px] font-bold text-red-600">汽座：兒童座椅 × 2（取車現場讓小孩試坐，確認安全帶肩膀/髖骨貼合鎖定後再上路）</span>
+                <span class="text-[11px] font-bold text-red-600">汽座：兒童座椅 × 2</span>
             </div>
             <div class="bg-gray-50 p-2.5 rounded-xl text-xs border-l-4 border-teal-500">
                 <strong class="text-teal-900">2 號車（｜CHOU CHUNG-CHIH）<span class="text-red-500 ml-1">🌟 需升級大車</span></strong><br>
                 <span class="text-gray-600">乘客：CHOU CHUNG-CHIH、WANG YU-TING、男童（5歲）、HUANG JU-ICHU（長輩）、CHOU MING-HSI（長輩） ➔ <strong>共 5 人</strong></span><br>
-                <span class="text-[11px] font-bold text-red-600">汽座：兒童座椅 × 1（取車時試坐固定確認）</span>
+                <span class="text-[11px] font-bold text-red-600">汽座：兒童座椅 × 1</span>
             </div>
         </div>
 
-        <h4 class="font-bold text-gray-800 text-xs mb-2"><i class="fa-solid fa-folder-closed text-amber-600 mr-1.5"></i>【2 車出發前必備專屬文件包 ＆ 導航雙軌】</h4>
-        <p class="text-xs text-gray-600 mb-2"><strong>📁 每車專屬透明文件夾（各車自備一份，不共用）：</strong>該車租車預約單、駕駛人護照影本、台灣駕照正本、日文譯本正本、保險合約書、ETC 記錄表、飯店與緊急聯絡電話。</p>
-        <p class="text-xs text-gray-600 mb-3"><strong>📱 導航與通訊設定：</strong>主駕駛手機預載 Google Maps ＆ Apple Maps 離線地圖（出發前先實機輸入各點 MapCode 測試）。車上常備：日本上網 SIM 卡/漫遊、車充接頭、充電線、行動電源。</p>
-
-        <h4 class="font-bold text-red-700 text-xs mb-2"><i class="fa-solid fa-triangle-exclamation text-red-500 mr-1.5"></i>【日本自駕鐵則 ＆ 車隊走散處理規則】</h4>
+        <h4 class="font-bold text-red-700 text-xs mb-2"><i class="fa-solid fa-triangle-exclamation text-red-500 mr-1.5"></i>【日本自駕鐵則 ＆ 車隊走散處理】</h4>
         <ul class="text-xs text-gray-700 space-y-1.5">
-            <li>• <strong>左側通行：</strong>靠左行駛、轉彎「左小彎、右大彎」、駕駛座在右側。</li>
-            <li>• <strong>紅燈禁止左轉：</strong>遇紅燈必須完全停下，除非有專用綠色箭頭指示。</li>
-            <li>• <strong>行人絕對優先：</strong>斑馬線有行人欲通行時，務必提前完全煞停禮讓。</li>
-            <li>• <strong class="text-red-600">嚴禁酒駕：</strong>喝酒完全不開車，當晚有飲酒者隔日早晨確認完全清醒再換手。</li>
             <li>• <strong>🚗 車隊走散規則：</strong>「前車不是導航，Google Maps 才是導航」。2 車依各自導航行駛，不要求緊貼。遇紅燈、交流道分開時直接開往下一景點，絕不在路邊危險等車。</li>
             <li>• <strong>🅿️ 餐廳/加油站抵達規則：</strong>Day 1 伊芸 SA 各自停靠；Day 3 燒肉先到的車輛先派代表報到（單號 9ASHJD）；Day 4 加油後各車自行開往 OTS 還車。</li>
         </ul>
@@ -1859,7 +1827,7 @@
                 <strong>大團解套：</strong>全天僅保 3 個「觀賞集合點」【09:30 鬼蝠魟、11:15 海豚劇場到位、14:40 鯨鯊觀賞卡位】；另設 1 個【15:35 全團撤退點】。其餘時間允許自由漫遊。<br>
                 <strong>早鳥分流：</strong>08:10 發車。第 1 車先鋒衝 1F 抽 Ocean Blue 景觀席（沒搶到不影響主行程，長輩小小孩吹冷氣）；第 2 車主力 09:20 大水槽正面就位。10:00 門口會合直上「黑潮探險」上方步道。<br>
                 <strong>美海廣場佔位：</strong>10:45–11:00 離館蓋透明螢光印章；11:40 左右視現場狀況派 1 位大人提前前往美海廣場（海豚秀 > 午餐座位，不強求硬性派人）。<br>
-                <strong>燒肉入席保位：</strong>15:35 撤退、16:10 最晚發車。前一晚務必確認 9 人「事前オーダー」已完成；第一台車抵達立即持單號 9ASHJD 報到保位，17:45 準時入席。
+                <strong>燒肉入席保位：</strong>15:35 撤退、16:10 最晚發車。前一晚務必確認 12 人「事前オーダー」已完成；第一台車抵達立即持單號 9ASHJD 報到保位，17:45 準時入席。
             </li>
             <li class="bg-red-50 border border-red-200 p-2.5 rounded-xl">
                 <span class="font-black text-red-700 block mb-0.5">🔴 Day 4（DMM 3 機同步搶票 ＆ 15:30 採買截止清點）</span>
@@ -1884,6 +1852,7 @@
     </div>
 </div>
 
+<!-- STREAMING_CHUNK:Rendering Scripts -->
 <script>
     // 天數切換邏輯
     function showDay(day) {
@@ -1961,3 +1930,4 @@
 
 </body>
 </html>
+```eof
