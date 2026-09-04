@@ -1465,6 +1465,9 @@
                                 <span class="inline-flex items-center justify-center bg-slate-800 text-white px-2.5 py-1 rounded-lg text-xs font-black tracking-wide shadow-sm">
                                     <i class="fa-regular fa-clock mr-1 opacity-80"></i>12:00 - 13:00
                                 </span>
+                                <span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-bold bg-green-100 text-green-700 border border-green-200">
+                                    <i class="fa-solid fa-leaf"></i> 彈性享受
+                                </span>
                             </div>
                             <h4 class="text-gray-900 font-black text-base leading-snug">🍱 【午餐】美海廣場吹冷氣野餐</h4>
                         </div>
@@ -2314,94 +2317,99 @@
 <div id="hotelModal" class="modal">
     <div class="modal-content">
         <div class="flex justify-between items-center mb-4 border-b pb-2">
-            <h3 class="text-lg font-black text-blue-900"><i class="fa-solid fa-hotel mr-2 text-blue-600"></i>住宿飯店生活機能</h3>
+            <h3 class="text-lg font-black text-blue-900"><i class="fa-solid fa-map-location-dot mr-2 text-blue-600"></i>住宿飯店生活機能</h3>
             <button onclick="closeModal('hotelModal')" class="text-gray-400 hover:text-gray-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
         </div>
         
-        <!-- 飯店基本資訊 & 早餐 -->
-        <div class="mb-5">
+        <!-- 飯店基本資訊 -->
+        <div class="mb-6">
             <div class="flex items-center mb-3">
                 <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mr-3 shrink-0"><i class="fa-solid fa-bed text-lg"></i></div>
                 <div>
                     <h4 class="font-bold text-gray-800 text-base">名護櫻之家飯店</h4>
-                    <p class="text-xs text-gray-500 mt-0.5">Hotel Sakurano Familia Nago・3 晚連住</p>
+                    <p class="text-xs text-gray-500 mt-0.5">Hotel Sakurano Familia Nago</p>
                 </div>
-            </div>
-            
-            <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200 text-sm text-amber-900 mb-3 shadow-sm leading-relaxed">
-                <strong class="text-amber-700 block mb-1 text-sm"><i class="fa-solid fa-mug-saucer mr-1.5"></i>飯店早餐服務</strong>
-                每日早晨提供住宿旅客元氣早餐，Day 2～Day 4 皆可直接在飯店餐廳享用完早餐後再從容出發，免去早起四處找早餐店的奔波。
             </div>
             
             <div class="text-sm text-gray-600 flex items-start gap-2 bg-gray-50 p-3 rounded-xl border border-gray-200 leading-relaxed">
                 <i class="fa-solid fa-location-dot mt-1 text-blue-500 text-base"></i>
-                <span><strong>名護市東江 5 丁目 13-5</strong><br>緊鄰 58 號國道，許田交流道下來約 10 分鐘，全室面海房型。</span>
+                <span><strong>沖繩縣名護市東江 5-13-5</strong><br>東江區域散步地圖住宿基準點</span>
             </div>
         </div>
 
-        <!-- 重點機能 -->
-        <ul class="space-y-3 text-sm text-gray-700 mb-6 leading-relaxed">
-            <li class="bg-blue-50/70 p-3 rounded-xl border border-blue-100">
-                <div class="font-bold text-blue-800 mb-1 text-sm"><i class="fa-solid fa-water mr-1.5"></i>東江海岸 / 東江原第三公園 (步行 15 秒)</div>
-                飯店後方即是沙灘與防波堤步道，早晨吃完早餐長輩可散步看海、傍晚小孩踩沙看夕陽極為舒適。
-            </li>
-            <li class="bg-sky-50/70 p-3 rounded-xl border border-sky-100">
-                <div class="font-bold text-sky-800 mb-1 text-sm"><i class="fa-solid fa-ice-cream mr-1.5"></i>BLUE SEAL 冰淇淋 名護店 (步行 1–2 分鐘)</div>
-                就在飯店路口旁，隨時能買紅芋、海鹽焦糖冰淇淋帶到海邊吃。
-            </li>
-            <li class="bg-purple-50/70 p-3 rounded-xl border border-purple-100">
-                <div class="font-bold text-purple-800 mb-1 text-sm"><i class="fa-solid fa-bag-shopping mr-1.5"></i>MEGA 唐吉訶德名護店 (開車 6–8 分鐘)</div>
-                營業至凌晨 02:00 之大型免稅店，小孩睡後大人分批開車前往採買藥妝零食最清靜。
-            </li>
-        </ul>
-
-        <!-- 超市與超商分類清單 -->
-        <div class="space-y-5">
-            <!-- 生鮮超市 -->
+        <div class="space-y-6">
+            <!-- 一、便利商店 -->
             <div>
-                <h4 class="font-bold text-gray-800 text-sm mb-3 flex items-center bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-cart-shopping text-emerald-600 w-6 text-center mr-1.5"></i>生鮮超市與生活量販</h4>
+                <h4 class="font-bold text-gray-800 text-sm mb-3 flex items-center bg-green-50 text-green-900 p-2 rounded-lg border border-green-100">
+                    <i class="fa-solid fa-store text-green-600 w-6 text-center mr-1.5"></i>一、便利商店 (24H，隨時補給)
+                </h4>
                 <div class="space-y-3 text-sm">
-                    <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors leading-relaxed">
-                        <div class="flex justify-between items-start mb-1.5">
-                            <strong class="text-emerald-700 text-base">Big 1 名護店</strong>
-                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded font-bold border border-gray-200 shrink-0">步行 3-4 分 | 09:00-23:00</span>
-                        </div>
-                        <p class="text-gray-600">沖繩在地平價連鎖量販店，採買伴手禮、平價飲料零食、日常雜貨首選。</p>
+                    <div class="border border-gray-200 rounded-lg p-3 border-l-4 border-l-green-500 leading-relaxed">
+                        <strong class="text-green-700 block mb-1">1. FamilyMart 名護東江五丁目店 (全家)</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 1-2 分鐘</span>
+                        <p class="text-gray-600">距離飯店最近的超商，就在同一街區。想買超人氣的「全家炸雞 (FamiChicken)」、在地啤酒或隔天早餐，下樓轉個彎就到。</p>
                     </div>
-                    <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors leading-relaxed">
-                        <div class="flex justify-between items-start mb-1.5">
-                            <strong class="text-emerald-700 text-base">Town Plaza Kanehide</strong>
-                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded font-bold border border-gray-200 shrink-0">步行 4-6 分 | 07:00-23:00</span>
-                        </div>
-                        <p class="text-[11px] text-gray-500 mb-1.5">なご灣市場店</p>
-                        <p class="text-gray-600">在地大型生鮮超市，主打名護灣海產（生魚片、壽司）、沖繩時令水果、熱食便當與整箱 Orion 啤酒。</p>
+                    <div class="border border-gray-200 rounded-lg p-3 border-l-4 border-l-blue-500 leading-relaxed">
+                        <strong class="text-blue-700 block mb-1">2. Lawson 名護東江五丁目店 (羅森)</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 3-4 分鐘</span>
+                        <p class="text-gray-600">日本必逛超商之一。若想吃 Lawson 經典招牌「炸雞塊 (Karaage-kun)」或超人氣甜點「Uchi Café 生乳捲」，散步過去馬上抵達。</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-3 border-l-4 border-l-red-500 leading-relaxed">
+                        <strong class="text-red-700 block mb-1">3. 7-Eleven 名護東江四丁目店 (統一超商)</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 6-8 分鐘</span>
+                        <p class="text-gray-600">稍微過個街區即可抵達。若有特定想買的 7-11 自有品牌零食、雪肌粹洗面乳，或需要使用 7-11 國際提款機 (ATM) 領取日幣，非常方便。</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- 便利商店 -->
+
+            <!-- 二、購物採買 -->
             <div>
-                <h4 class="font-bold text-gray-800 text-sm mb-3 flex items-center bg-gray-100 p-2 rounded-lg"><i class="fa-solid fa-store text-sky-600 w-6 text-center mr-1.5"></i>飯店周邊便利商店 (皆 24H)</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div class="border border-gray-200 rounded-lg p-3 border-l-4 border-l-green-500 leading-relaxed">
-                        <strong class="text-green-700 block mb-1">全家 名護東江五丁目店</strong>
-                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行 2-3 分鐘 (最近)</span>
-                        <p class="text-gray-600">必買：FamiChiki 經典無骨炸雞、烤雞肉串、全家甜點。</p>
+                <h4 class="font-bold text-gray-800 text-sm mb-3 flex items-center bg-amber-50 text-amber-900 p-2 rounded-lg border border-amber-100">
+                    <i class="fa-solid fa-cart-shopping text-amber-600 w-6 text-center mr-1.5"></i>二、購物採買 (超市／折扣店)
+                </h4>
+                <div class="space-y-3 text-sm">
+                    <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors leading-relaxed">
+                        <strong class="text-amber-700 block mb-1">1. Town Plaza Kanehide Nago Bay Market</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 4-5 分鐘 | 07:00–23:00</span>
+                        <p class="text-gray-600">沖繩在地連鎖生鮮超市 (金秀超市)，適合採買水果、現做便當、炸物熱食、大包裝飲料零食，回飯店陽台享用宵夜首選。</p>
                     </div>
-                    <div class="border border-gray-200 rounded-lg p-3 border-l-4 border-l-green-500 leading-relaxed">
-                        <strong class="text-green-700 block mb-1">全家 名護東江店</strong>
-                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行 4-5 分鐘</span>
-                        <p class="text-gray-600">位於 58 號國道往北方向，人潮分流的好選擇。</p>
+                    <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors leading-relaxed">
+                        <strong class="text-amber-700 block mb-1">2. Big 1 Nago (Big One 名護店)</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 5-7 分鐘 | 09:00–23:00</span>
+                        <p class="text-gray-600">在地大型綜合折扣百貨，各類平價伴手禮、日常雜貨、零食泡麵與基礎藥妝一應俱全。</p>
                     </div>
-                    <div class="border border-gray-200 rounded-lg p-3 border-l-4 border-l-red-500 leading-relaxed">
-                        <strong class="text-red-700 block mb-1">7-Eleven 名護東江四丁目店</strong>
-                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行 4-5 分鐘</span>
-                        <p class="text-gray-600">自有品牌熟食、現煮咖啡，附設 Seven Bank ATM 方便跨國提款。</p>
+                </div>
+            </div>
+
+            <!-- 三、人氣美食＆正餐 -->
+            <div>
+                <h4 class="font-bold text-gray-800 text-sm mb-3 flex items-center bg-red-50 text-red-900 p-2 rounded-lg border border-red-100">
+                    <i class="fa-solid fa-utensils text-red-600 w-6 text-center mr-1.5"></i>三、人氣美食 ＆ 正餐
+                </h4>
+                <div class="space-y-3 text-sm">
+                    <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors leading-relaxed">
+                        <strong class="text-red-700 block mb-1">1. 暖暮拉麵 名護店</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 3-4 分鐘 | 11:00–00:00</span>
+                        <p class="text-gray-600">超人氣九州豚骨拉麵，可自選麵條粗細與湯頭濃淡，過個馬路即達，適合午晚餐或深夜熱呼呼宵夜。</p>
                     </div>
-                    <div class="border border-gray-200 rounded-lg p-3 border-l-4 border-l-blue-500 leading-relaxed">
-                        <strong class="text-blue-700 block mb-1">Lawson 名護東江五丁目店</strong>
-                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行 5-7 分鐘</span>
-                        <p class="text-gray-600">必買：L-chiki 炸雞、Kara-age Kun 炸雞球、Uchi Café 甜點。</p>
+                    <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors leading-relaxed">
+                        <strong class="text-red-700 block mb-1">2. A&W 名護店</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 4-5 分鐘 | 24 小時營業</span>
+                        <p class="text-gray-600">沖繩必訪美式復古速食，招牌麥根沙士 (內用可免費續杯)、圈圈薯條與特色漢堡；半夜肚子餓隨時有得吃。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 四、甜點冰品 -->
+            <div>
+                <h4 class="font-bold text-gray-800 text-sm mb-3 flex items-center bg-sky-50 text-sky-900 p-2 rounded-lg border border-sky-100">
+                    <i class="fa-solid fa-ice-cream text-sky-600 w-6 text-center mr-1.5"></i>四、甜點冰品
+                </h4>
+                <div class="space-y-3 text-sm">
+                    <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors leading-relaxed">
+                        <strong class="text-sky-700 block mb-1">1. Blue Seal 名護店</strong>
+                        <span class="text-xs text-gray-500 block mb-1.5"><i class="fa-solid fa-person-walking mr-1"></i>步行約 4-5 分鐘 | 10:00–21:00</span>
+                        <p class="text-gray-600">沖繩最具代表性的冰淇淋品牌，必試紅芋、沖繩金楚糕 (鹽脆餅)、海鹽雪鹽等限定口味。</p>
                     </div>
                 </div>
             </div>
