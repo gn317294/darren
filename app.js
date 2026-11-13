@@ -3,8 +3,8 @@ const key = 'xu-family-garden-v1';
 const sessionLoginKey = 'xu-garden-logged-in';
 const sessionParentKey = 'xu-garden-parent-unlocked';
 const cloudConfigKey = 'xu-garden-cloud-config';
-const DEFAULT_CLOUD_URL = '';
-const DEFAULT_CLOUD_TOKEN = '';
+const DEFAULT_CLOUD_URL = 'https://script.google.com/macros/s/AKfycbwfSDogknZ_sQpZUa14MKto_1TRShc9FZgWOWo_ikoT6aHPDwuMHnd4j4gtIm8pv0FJ/exec';
+const DEFAULT_CLOUD_TOKEN = 'darren0937701291';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const today = () => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Taipei' }).format(new Date());
 
