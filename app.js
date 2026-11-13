@@ -162,9 +162,7 @@ function updateAuthUI() {
   $('#appAside').hidden = !logged;
   $('#appMain').hidden = !logged;
   if (!logged) {
-    $('#loginHint').textContent = db.auth.isDefaultFamily
-    
-      : '請輸入你們設定的家庭登入密碼。';
+    $('#loginHint').textContent = '';
     return;
   }
   const unlocked = isParentUnlocked();
@@ -181,9 +179,7 @@ function requireParentAuth(desc, onSuccess) {
   $('#parentPinDesc').textContent = desc || '此操作需由家長輸入密碼確認。';
   $('#parentPinInput').value = '';
   $('#parentPinError').hidden = true;
-  $('#parentPinHint').textContent = db.auth.isDefaultParent
-    ? `初次使用預設家長密碼：${DEFAULT_PARENT_PIN}（解鎖後可在家長檢視修改）`
-    : '';
+  $('#parentPinHint').textContent = '';
   $('#parentPinModal').showModal();
 }
 
