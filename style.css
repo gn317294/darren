@@ -420,3 +420,50 @@ dialog > small { display: block; color: var(--muted); font-size: 13px; text-alig
   .print-only-area { display: block !important; border: 0 !important; padding: 0 !important; }
   .print-only-area .summary-box { border: 1px solid #ccc; background: #fff; font-size: 12pt; line-height: 1.7; }
 }
+
+.login-gate {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(circle at top right, #eaf0e1 0%, var(--paper) 60%);
+}
+.login-gate[hidden] { display: none; }
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 34px 30px;
+  box-shadow: 0 12px 32px rgba(41, 59, 54, 0.06);
+}
+.login-card h1 { font-size: 26px; margin: 18px 0 8px; }
+.login-card p { font-size: 15px; color: var(--muted); line-height: 1.75; margin: 0 0 18px; }
+.login-hint { font-size: 13px !important; color: #6e7a6b !important; margin: 12px 0 0 !important; }
+.form-error {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid #edd0d0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 14px;
+  margin-top: 12px;
+}
+.header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lock-dot { font-style: normal; font-size: 13px; margin-left: auto; }
+.parent-locked-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 36px 28px;
+  text-align: center;
+  max-width: 520px;
+  margin: 30px auto;
+}
+.parent-locked-box h2 { font-size: 24px; margin: 10px 0; }
+.parent-locked-box p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+@media (max-width: 800px) {
+  .header-actions .family-badge { display: none; }
+  .lock-dot { display: none; }
+}

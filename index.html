@@ -4,11 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>小步日常 · 家庭練習花園</title>
-  <meta name="description" content="彗瑄與邦盛的家庭日常練習與觀察紀錄">
+  <meta name="description" content="家庭日常練習與觀察紀錄">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <aside class="no-print">
+  <!-- 全站登入畫面 -->
+  <div id="loginGate" class="login-gate">
+    <div class="login-card">
+      <div class="brand"><span class="logo">✳</span> 小步日常 <small>FAMILY GROWTH GARDEN</small></div>
+      <h1>歡迎回到練習花園</h1>
+      <p>為了保護孩子的日常紀錄與隱私，請先輸入家庭登入密碼。</p>
+      <form id="loginForm">
+        <label>家庭登入密碼
+          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="請輸入密碼">
+        </label>
+        <div id="loginError" class="form-error" hidden>密碼不正確，請再試一次。</div>
+        <button class="primary full" type="submit">進入練習花園 →</button>
+      </form>
+      <p id="loginHint" class="login-hint"></p>
+    </div>
+  </div>
+
+  <aside id="appAside" class="no-print" hidden>
     <a class="brand" href="#home">
       <span class="logo">✳</span> 小步日常
       <small>FAMILY GROWTH GARDEN</small>
@@ -18,7 +35,7 @@
       <a href="#home">⌂ <span>首頁</span></a>
       <a href="#tasks">◷ <span>今日任務</span></a>
       <a href="#records">▤ <span>日常紀錄</span></a>
-      <a href="#parent">◈ <span>家長檢視</span></a>
+      <a href="#parent">◈ <span>家長檢視</span> <em id="parentLockBadge" class="lock-dot">🔒</em></a>
     </nav>
     <div class="sidebar-note">
       <span>🌱</span>
@@ -28,13 +45,17 @@
     <footer>家庭陪伴工具<br>不作為醫療診斷或治療</footer>
   </aside>
 
-  <main>
+  <main id="appMain" hidden>
     <header class="no-print">
       <div>
         <span class="eyebrow">一起練習，一起長大</span>
         <div id="date"></div>
       </div>
-      <div class="family-badge">☀ <span>徐家的小小練習室</span></div>
+      <div class="header-actions">
+        <button id="parentAuthBtn" class="secondary btn-sm" type="button">🔒 家長模式</button>
+        <button id="logoutBtn" class="ghost-btn btn-sm" type="button">登出</button>
+        <div class="family-badge">☀ <span>徐家的小小練習室</span></div>
+      </div>
     </header>
 
     <div class="children no-print">
@@ -55,6 +76,24 @@
     <div id="app"></div>
     <div id="toast" class="no-print" role="status"></div>
   </main>
+
+  <!-- 家長密碼驗證彈窗 -->
+  <dialog id="parentPinModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">家長專屬操作保護</span>
+    <h2>請輸入家長操作密碼</h2>
+    <p id="parentPinDesc">此操作（家長檢視、編輯／刪除紀錄、兌換獎勵）需由家長確認。</p>
+    <form id="parentPinForm">
+      <label>家長操作密碼
+        <input id="parentPinInput" type="password" required placeholder="請輸入家長密碼">
+      </label>
+      <div id="parentPinError" class="form-error" hidden>家長密碼不正確，請再試一次。</div>
+      <p id="parentPinHint" class="login-hint"></p>
+      <div class="modal-actions">
+        <button type="submit" class="primary">確認解鎖</button>
+      </div>
+    </form>
+  </dialog>
 
   <!-- 練習計時彈窗 -->
   <dialog id="exercise" class="no-print">

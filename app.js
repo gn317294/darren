@@ -1,7 +1,25 @@
 const $ = s => document.querySelector(s);
 const key = 'xu-family-garden-v1';
+const sessionLoginKey = 'xu-garden-logged-in';
+const sessionParentKey = 'xu-garden-parent-unlocked';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const today = () => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Taipei' }).format(new Date());
+
+function hashPin(str) {
+  let h1 = 0xdeadbeef ^ 0x13579bdf;
+  let h2 = 0x41c6ce57 ^ 0x2468ace0;
+  for (let i = 0; i < str.length; i++) {
+    const ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+
+const DEFAULT_FAMILY_PIN = '2026';
+const DEFAULT_PARENT_PIN = '9999';
 
 const defaultRewards = {
   girl: [
@@ -71,6 +89,12 @@ function normalizeDB(raw) {
   const base = {
     version: 1,
     lastBackupAt: null,
+    auth: {
+      familyHash: hashPin(DEFAULT_FAMILY_PIN),
+      parentHash: hashPin(DEFAULT_PARENT_PIN),
+      isDefaultFamily: true,
+      isDefaultParent: true
+    },
     children: {
       girl: makeDefaultChild('girl'),
       boy: makeDefaultChild('boy')
@@ -78,6 +102,16 @@ function normalizeDB(raw) {
   };
   if (!raw || raw.version !== 1 || !raw.children) return base;
   base.lastBackupAt = typeof raw.lastBackupAt === 'number' ? raw.lastBackupAt : null;
+  if (raw.auth && typeof raw.auth === 'object') {
+    if (typeof raw.auth.familyHash === 'string') {
+      base.auth.familyHash = raw.auth.familyHash;
+      base.auth.isDefaultFamily = Boolean(raw.auth.isDefaultFamily);
+    }
+    if (typeof raw.auth.parentHash === 'string') {
+      base.auth.parentHash = raw.auth.parentHash;
+      base.auth.isDefaultParent = Boolean(raw.auth.isDefaultParent);
+    }
+  }
   for (const c of ['girl', 'boy']) {
     const src = raw.children[c];
     if (!src) continue;
@@ -113,6 +147,93 @@ let endTime = 0;
 let celebrateHero = false;
 let confirmDeleteKey = null;
 let summaryDays = 7;
+let pendingParentAction = null;
+
+function isLoggedIn() {
+  return sessionStorage.getItem(sessionLoginKey) === '1';
+}
+function isParentUnlocked() {
+  return sessionStorage.getItem(sessionParentKey) === '1';
+}
+
+function updateAuthUI() {
+  const logged = isLoggedIn();
+  $('#loginGate').hidden = logged;
+  $('#appAside').hidden = !logged;
+  $('#appMain').hidden = !logged;
+  if (!logged) {
+    $('#loginHint').textContent = db.auth.isDefaultFamily
+      ? `初次使用預設密碼：${DEFAULT_FAMILY_PIN}（進入後可於家長檢視修改）`
+      : '請輸入你們設定的家庭登入密碼。';
+    return;
+  }
+  const unlocked = isParentUnlocked();
+  $('#parentLockBadge').textContent = unlocked ? '🔓' : '🔒';
+  $('#parentAuthBtn').textContent = unlocked ? '🔓 家長已解鎖（點擊鎖定）' : '🔒 家長模式';
+}
+
+function requireParentAuth(desc, onSuccess) {
+  if (isParentUnlocked()) {
+    onSuccess();
+    return;
+  }
+  pendingParentAction = onSuccess;
+  $('#parentPinDesc').textContent = desc || '此操作需由家長輸入密碼確認。';
+  $('#parentPinInput').value = '';
+  $('#parentPinError').hidden = true;
+  $('#parentPinHint').textContent = db.auth.isDefaultParent
+    ? `初次使用預設家長密碼：${DEFAULT_PARENT_PIN}（解鎖後可在家長檢視修改）`
+    : '';
+  $('#parentPinModal').showModal();
+}
+
+$('#loginForm').onsubmit = e => {
+  e.preventDefault();
+  const pin = $('#loginPassword').value.trim();
+  if (hashPin(pin) === db.auth.familyHash) {
+    sessionStorage.setItem(sessionLoginKey, '1');
+    $('#loginPassword').value = '';
+    $('#loginError').hidden = true;
+    updateAuthUI();
+    render();
+  } else {
+    $('#loginError').hidden = false;
+  }
+};
+
+$('#parentPinForm').onsubmit = e => {
+  e.preventDefault();
+  const pin = $('#parentPinInput').value.trim();
+  if (hashPin(pin) === db.auth.parentHash) {
+    sessionStorage.setItem(sessionParentKey, '1');
+    $('#parentPinModal').close();
+    updateAuthUI();
+    const act = pendingParentAction;
+    pendingParentAction = null;
+    if (act) act();
+    toast('已解鎖家長操作模式。');
+  } else {
+    $('#parentPinError').hidden = false;
+  }
+};
+
+$('#parentAuthBtn').onclick = () => {
+  if (isParentUnlocked()) {
+    sessionStorage.removeItem(sessionParentKey);
+    updateAuthUI();
+    render();
+    toast('已鎖定家長模式，可安心交給孩子操作。');
+  } else {
+    requireParentAuth('解鎖後即可檢視完整統計、管理獎勵與修改紀錄。', () => render());
+  }
+};
+
+$('#logoutBtn').onclick = () => {
+  sessionStorage.removeItem(sessionLoginKey);
+  sessionStorage.removeItem(sessionParentKey);
+  confirmDeleteKey = null;
+  updateAuthUI();
+};
 
 const profiles = {
   girl: {
@@ -407,14 +528,14 @@ function rewardsWidgetHTML() {
   const list = d.rewards || [];
   return `<div class="card tip">
     <h3>🎁 集點獎勵兌換區</h3>
-    <p>目前擁有 <b>🌸 ${d.points} 朵小花</b>（每完成 1 次練習可獲得 1 朵）。</p>
+    <p>目前擁有 <b>🌸 ${d.points} 朵小花</b>（兌換需由家長輸入密碼確認）。</p>
     ${list.length ? list.map(r => `
       <div class="reward-item">
         <div class="reward-info">
           <b>${esc(r.icon || '🎁')} ${esc(r.title)}</b>
           <small>需要 ${r.cost} 朵小花</small>
         </div>
-        <button class="secondary btn-sm" data-redeem="${esc(r.id)}" ${d.points < r.cost ? 'disabled style="opacity:.45;cursor:not-allowed"' : ''}>兌換</button>
+        <button class="secondary btn-sm" data-redeem="${esc(r.id)}" ${d.points < r.cost ? 'disabled style="opacity:.45;cursor:not-allowed"' : ''}>兌換 🔒</button>
       </div>`).join('') : '<p class="subtext">尚未設定獎勵，可於家長檢視頁新增。</p>'}
   </div>`;
 }
@@ -423,7 +544,7 @@ function renderBackupBanner() {
   const banner = $('#backupBanner');
   const hasData = db.children.girl.logs.length + db.children.girl.sessions.length + db.children.boy.logs.length + db.children.boy.sessions.length > 0;
   const daysSince = db.lastBackupAt ? Math.floor((Date.now() - db.lastBackupAt) / 86400000) : null;
-  const needBackup = (page === 'home' || page === 'parent') && ((daysSince === null && hasData) || (daysSince !== null && daysSince >= 7));
+  const needBackup = (page === 'home' || (page === 'parent' && isParentUnlocked())) && ((daysSince === null && hasData) || (daysSince !== null && daysSince >= 7));
   if (!needBackup) {
     banner.hidden = true;
     banner.innerHTML = '';
@@ -618,7 +739,7 @@ function recordPage() {
         <div class="card tip" style="margin:0">
           <h3>記錄事實，保留空白</h3>
           <p>記下看見的行為、時間與協助方式。分心次數會隨活動長度不同而改變，不用拿兩個孩子互相比較。</p>
-          <p>每一筆儲存後都支援「編輯」或「刪除」，方便誤填時即時修正。</p>
+          <p>每一筆儲存後若要「編輯」或「刪除」，會需要輸入家長操作密碼。</p>
         </div>
       </div>
     </div>
@@ -712,6 +833,15 @@ ${notes.length ? notes.join('\n') : '（此區間尚無文字筆記）'}`;
 }
 
 function parentPage() {
+  if (!isParentUnlocked()) {
+    return `<div class="parent-locked-box">
+      <span class="eyebrow">PARENTS ONLY</span>
+      <h2>🔒 家長檢視已鎖定</h2>
+      <p>為了避免孩子誤改觀察紀錄、獎勵設定或備份資料，進入家長檢視前請先驗證家長操作密碼。</p>
+      <button id="unlockParentPageBtn" class="primary" type="button">輸入家長密碼解鎖 →</button>
+    </div>`;
+  }
+
   const p = profiles[child];
   const ss = sessionsIn(week());
   const days = new Set(ss.map(s => s.date)).size;
@@ -724,9 +854,9 @@ function parentPage() {
   return `<h1 class="page-title">陪伴的足跡。</h1>
     <p class="subtext">${p.full}的個別檔案與每週觀察 · ${week()[0]} — ${week()[6]}</p>
     <div class="stats">
-      <div class="card stat"><span>本週練習日</span><strong>${days}<small style="font-size:13px"> / 7 天</small></strong><span>有打卡的不同日期</span></div>
-      <div class="card stat"><span>本週完成練習</span><strong>${ss.length}<small style="font-size:13px"> 次</small></strong><span>包含自訂與系統練習</span></div>
-      <div class="card stat"><span>累積小花點數</span><strong>${data().points}<small style="font-size:13px"> 🌸</small></strong><span>已兌換獎勵 ${redemptions.length} 次</span></div>
+      <div class="card stat"><span>本週練習日</span><strong>${days}<small style="font-size:14px"> / 7 天</small></strong><span>有打卡的不同日期</span></div>
+      <div class="card stat"><span>本週完成練習</span><strong>${ss.length}<small style="font-size:14px"> 次</small></strong><span>包含自訂與系統練習</span></div>
+      <div class="card stat"><span>累積小花點數</span><strong>${data().points}<small style="font-size:14px"> 🌸</small></strong><span>已兌換獎勵 ${redemptions.length} 次</span></div>
     </div>
     <div class="layout">
       <div>
@@ -793,7 +923,7 @@ function parentPage() {
               </div>
             </div>`).join('') : '<p class="subtext">尚未設定獎勵。</p>'}
           </div>
-          ${redemptions.length ? `<div style="margin-top:14px"><b style="font-size:12px">近期兌換紀錄</b>${redemptions.slice(0, 8).map(rd => `<p class="subtext" style="margin:4px 0">✓ ${esc(rd.date)} 兌換「${esc(rd.title)}」（-${rd.cost} 🌸）</p>`).join('')}</div>` : ''}
+          ${redemptions.length ? `<div style="margin-top:14px"><b style="font-size:14px">近期兌換紀錄</b>${redemptions.slice(0, 8).map(rd => `<p class="subtext" style="margin:4px 0">✓ ${esc(rd.date)} 兌換「${esc(rd.title)}」（-${rd.cost} 🌸）</p>`).join('')}</div>` : ''}
         </div>
 
         <div class="section-head"><h2>孩子的個別檔案</h2></div>
@@ -808,6 +938,22 @@ function parentPage() {
           </label>
           <button class="secondary full">儲存補充內容</button>
         </form>
+
+        <div class="section-head"><h2>🔐 密碼與安全設定</h2></div>
+        <div class="card">
+          <form id="pinChangeForm" class="form-grid">
+            <label>新的家庭登入密碼（留空則不修改）
+              <input name="newFamilyPin" type="password" minlength="4" placeholder="至少 4 碼">
+            </label>
+            <label>新的家長操作密碼（留空則不修改）
+              <input name="newParentPin" type="password" minlength="4" placeholder="至少 4 碼">
+            </label>
+            <div class="wide">
+              <button class="secondary full" type="submit">更新密碼設定</button>
+            </div>
+          </form>
+          <p class="subtext" style="margin-top:10px">修改後會儲存在瀏覽器與 JSON 備份中。交給孩子使用前，可點右上方「🔓 家長已解鎖」一鍵鎖回。</p>
+        </div>
       </div>
 
       <div>
@@ -845,6 +991,7 @@ function parentPage() {
 }
 
 function render() {
+  if (!isLoggedIn()) return;
   page = location.hash.slice(1) || 'home';
   if (!['home', 'tasks', 'records', 'parent'].includes(page)) page = 'home';
   document.querySelectorAll('nav a').forEach(a => a.classList.toggle('active', a.hash === '#' + page));
@@ -853,6 +1000,10 @@ function render() {
   renderBackupBanner();
   $('#app').innerHTML = ({ home, tasks: taskPage, records: recordPage, parent: parentPage }[page])();
   if (celebrateHero) setTimeout(() => { celebrateHero = false; }, 1600);
+
+  if ($('#unlockParentPageBtn')) {
+    $('#unlockParentPageBtn').onclick = () => requireParentAuth('請輸入家長密碼以進入家長檢視。', () => render());
+  }
 
   if ($('#level')) {
     $('#level').value = data().level;
@@ -872,16 +1023,21 @@ function render() {
   document.querySelectorAll('[data-redeem]').forEach(b => b.onclick = () => {
     const r = (data().rewards || []).find(x => x.id === b.dataset.redeem);
     if (!r || data().points < r.cost) return;
-    data().points -= r.cost;
-    data().redemptions.unshift({ id: crypto.randomUUID(), rewardId: r.id, title: r.title, cost: r.cost, date: today(), created: Date.now() });
-    save();
-    render();
-    toast(`太棒了！已兌換「${r.title}」🎉`);
+    requireParentAuth(`兌換獎勵「${r.title}」（需要 ${r.cost} 朵小花）需由家長確認。`, () => {
+      data().points -= r.cost;
+      data().redemptions.unshift({ id: crypto.randomUUID(), rewardId: r.id, title: r.title, cost: r.cost, date: today(), created: Date.now() });
+      save();
+      render();
+      toast(`太棒了！已兌換「${r.title}」🎉`);
+    });
   });
 
   document.querySelectorAll('[data-ask-del]').forEach(b => b.onclick = () => {
-    confirmDeleteKey = b.dataset.askDel;
-    render();
+    const keyDel = b.dataset.askDel;
+    requireParentAuth('刪除紀錄前需先驗證家長密碼。', () => {
+      confirmDeleteKey = keyDel;
+      render();
+    });
   });
   document.querySelectorAll('[data-cancel-del]').forEach(b => b.onclick = () => {
     confirmDeleteKey = null;
@@ -899,8 +1055,14 @@ function render() {
     toast('已刪除該筆紀錄。');
   });
 
-  document.querySelectorAll('[data-edit-log]').forEach(b => b.onclick = () => openEditLog(b.dataset.editLog));
-  document.querySelectorAll('[data-edit-session]').forEach(b => b.onclick = () => openEditSession(b.dataset.editSession));
+  document.querySelectorAll('[data-edit-log]').forEach(b => b.onclick = () => {
+    const id = b.dataset.editLog;
+    requireParentAuth('編輯已儲存的觀察紀錄需先驗證家長密碼。', () => openEditLog(id));
+  });
+  document.querySelectorAll('[data-edit-session]').forEach(b => b.onclick = () => {
+    const id = b.dataset.editSession;
+    requireParentAuth('編輯練習打卡紀錄需先驗證家長密碼。', () => openEditSession(id));
+  });
 
   if ($('#logForm')) {
     $('#logForm').onsubmit = e => {
@@ -921,6 +1083,31 @@ function render() {
       data().extra = $('#extra').value;
       save();
       toast('補充內容已儲存。');
+    };
+  }
+
+  if ($('#pinChangeForm')) {
+    $('#pinChangeForm').onsubmit = e => {
+      e.preventDefault();
+      const fd = Object.fromEntries(new FormData(e.target));
+      let changed = false;
+      if (fd.newFamilyPin && fd.newFamilyPin.trim()) {
+        db.auth.familyHash = hashPin(fd.newFamilyPin.trim());
+        db.auth.isDefaultFamily = false;
+        changed = true;
+      }
+      if (fd.newParentPin && fd.newParentPin.trim()) {
+        db.auth.parentHash = hashPin(fd.newParentPin.trim());
+        db.auth.isDefaultParent = false;
+        changed = true;
+      }
+      if (!changed) {
+        toast('請至少輸入一組新密碼。');
+        return;
+      }
+      save();
+      e.target.reset();
+      toast('密碼設定已更新！');
     };
   }
 
@@ -1160,6 +1347,9 @@ async function importData(e) {
       if (!d || !Array.isArray(d.logs) || !Array.isArray(d.sessions) || typeof d.checks !== 'object' || d.checks === null) throw Error();
     }
     const merged = structuredClone(db);
+    if (incoming.auth && typeof incoming.auth.familyHash === 'string') {
+      merged.auth = incoming.auth;
+    }
     for (const c of ['girl', 'boy']) {
       const from = incoming.children[c];
       const to = merged.children[c];
@@ -1206,4 +1396,5 @@ $('#date').textContent = new Intl.DateTimeFormat('zh-TW', {
   weekday: 'long'
 }).format(new Date());
 
-render();
+updateAuthUI();
+if (isLoggedIn()) render();
