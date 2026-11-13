@@ -11,7 +11,7 @@
  * 6. 複製產生的網頁應用程式網址（/exec 結尾），貼回「小步日常 → 家長檢視 → 雲端自動同步設定」即可！
  */
 
-const SECRET_TOKEN = '請改成你們自訂的密鑰';
+const SECRET_TOKEN = 'darren0937701291';
 const DATA_SHEET = 'SyncData';
 const READABLE_SHEET = '日常紀錄總覽';
 const CHUNK_SIZE = 45000;
