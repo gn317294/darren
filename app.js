@@ -2,6 +2,9 @@ const $ = s => document.querySelector(s);
 const key = 'xu-family-garden-v1';
 const sessionLoginKey = 'xu-garden-logged-in';
 const sessionParentKey = 'xu-garden-parent-unlocked';
+const cloudConfigKey = 'xu-garden-cloud-config';
+const DEFAULT_CLOUD_URL = '';
+const DEFAULT_CLOUD_TOKEN = '';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const today = () => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Taipei' }).format(new Date());
 
@@ -88,6 +91,8 @@ function makeDefaultChild(c) {
 function normalizeDB(raw) {
   const base = {
     version: 1,
+    updatedAt: 0,
+    deletedIds: [],
     lastBackupAt: null,
     auth: {
       familyHash: hashPin(DEFAULT_FAMILY_PIN),
@@ -101,6 +106,8 @@ function normalizeDB(raw) {
     }
   };
   if (!raw || raw.version !== 1 || !raw.children) return base;
+  base.updatedAt = typeof raw.updatedAt === 'number' ? raw.updatedAt : 0;
+  base.deletedIds = Array.isArray(raw.deletedIds) ? raw.deletedIds.slice(-200) : [];
   base.lastBackupAt = typeof raw.lastBackupAt === 'number' ? raw.lastBackupAt : null;
   if (raw.auth && typeof raw.auth === 'object') {
     if (typeof raw.auth.familyHash === 'string') {
@@ -192,6 +199,7 @@ $('#loginForm').onsubmit = e => {
     $('#loginError').hidden = true;
     updateAuthUI();
     render();
+    pullFromCloud(true);
   } else {
     $('#loginError').hidden = false;
   }
@@ -358,9 +366,132 @@ function getTaskPrompt(t) {
   return t.prompt[child] || t.prompt.girl || '';
 }
 
-function save() {
+
+function getCloudConfig() {
   try {
+    const saved = JSON.parse(localStorage.getItem(cloudConfigKey));
+    if (saved && saved.url) return { url: saved.url.trim(), token: (saved.token || '').trim() };
+  } catch {}
+  if (DEFAULT_CLOUD_URL) return { url: DEFAULT_CLOUD_URL.trim(), token: DEFAULT_CLOUD_TOKEN.trim() };
+  return { url: '', token: '' };
+}
+
+function setCloudStatus(text, isError = false) {
+  const btn = $('#syncStatusBtn');
+  if (!btn) return;
+  btn.textContent = text;
+  btn.style.color = isError ? 'var(--danger)' : '';
+  btn.style.borderColor = isError ? '#edd0d0' : '';
+}
+
+function mergeDatasets(localData, incoming) {
+  const merged = structuredClone(localData);
+  const delSet = new Set([...(localData.deletedIds || []), ...(incoming.deletedIds || [])]);
+  merged.deletedIds = Array.from(delSet).slice(-200);
+
+  if ((incoming.updatedAt || 0) > (localData.updatedAt || 0) && incoming.auth && typeof incoming.auth.familyHash === 'string') {
+    merged.auth = incoming.auth;
+  }
+
+  for (const c of ['girl', 'boy']) {
+    const from = incoming.children && incoming.children[c];
+    const to = merged.children[c];
+    if (!from) continue;
+
+    for (const k of ['logs', 'sessions', 'redemptions', 'customTasks', 'rewards']) {
+      const fromArr = Array.isArray(from[k]) ? from[k] : [];
+      const byId = new Map();
+      for (const item of to[k]) {
+        if (item && item.id && !delSet.has(item.id)) byId.set(item.id, item);
+      }
+      for (const item of fromArr) {
+        if (!item || !item.id || delSet.has(item.id)) continue;
+        const prev = byId.get(item.id);
+        if (!prev || (item.updatedAt || item.created || 0) > (prev.updatedAt || prev.created || 0)) {
+          byId.set(item.id, item);
+        }
+      }
+      to[k] = Array.from(byId.values());
+    }
+
+    for (const [date, state] of Object.entries(from.checks || {})) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(date) && ['ready', 'distracted', 'angry', 'tired'].includes(state) && !to.checks[date]) {
+        to.checks[date] = state;
+      }
+    }
+    if ((incoming.updatedAt || 0) > (localData.updatedAt || 0)) {
+      if (typeof from.extra === 'string' && from.extra) to.extra = from.extra;
+      if (Number.isFinite(from.points)) to.points = from.points;
+      if (['easy', 'normal', 'challenge'].includes(from.level)) to.level = from.level;
+      if (Number.isFinite(from.minutes)) to.minutes = from.minutes;
+    }
+  }
+  merged.updatedAt = Math.max(localData.updatedAt || 0, incoming.updatedAt || 0);
+  return normalizeDB(merged);
+}
+
+let syncTimer = null;
+async function pushToCloud() {
+  const cfg = getCloudConfig();
+  if (!cfg.url) { setCloudStatus('☁ 尚未設定雲端'); return; }
+  setCloudStatus('☁ 同步中...');
+  try {
+    const res = await fetch(cfg.url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ token: cfg.token, data: db })
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'SYNC_FAILED');
+    setCloudStatus('☁ 已同步雲端');
+  } catch {
+    setCloudStatus('☁ 同步失敗（點擊重試）', true);
+  }
+}
+
+async function pullFromCloud(silent = false) {
+  const cfg = getCloudConfig();
+  if (!cfg.url) { setCloudStatus('☁ 尚未設定雲端'); return; }
+  setCloudStatus('☁ 讀取雲端...');
+  try {
+    const res = await fetch(`${cfg.url}?token=${encodeURIComponent(cfg.token)}`);
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'PULL_FAILED');
+    if (json.data && json.data.version === 1) {
+      const before = JSON.stringify(db);
+      db = mergeDatasets(db, json.data);
+      localStorage.setItem(key, JSON.stringify(db));
+      if (JSON.stringify(db) !== before && (db.updatedAt || 0) > (json.data.updatedAt || 0)) {
+        await pushToCloud();
+      } else {
+        setCloudStatus('☁ 已同步雲端');
+      }
+      if (isLoggedIn()) render();
+    } else if ((db.updatedAt || 0) > 0) {
+      await pushToCloud();
+    } else {
+      setCloudStatus('☁ 已連線（雲端尚無資料）');
+    }
+    if (!silent) toast('已完成雲端資料同步！');
+  } catch {
+    setCloudStatus('☁ 雲端連線失敗', true);
+    if (!silent) toast('雲端連線失敗，請檢查網址與密鑰是否正確。');
+  }
+}
+
+function schedulePush() {
+  const cfg = getCloudConfig();
+  if (!cfg.url) return;
+  clearTimeout(syncTimer);
+  setCloudStatus('☁ 準備同步...');
+  syncTimer = setTimeout(() => { pushToCloud(); }, 600);
+}
+
+function save(skipPush = false) {
+  try {
+    db.updatedAt = Date.now();
     localStorage.setItem(key, JSON.stringify(db));
+    if (!skipPush) schedulePush();
     return true;
   } catch {
     toast('瀏覽器無法儲存，請先匯出備份。');
@@ -935,6 +1066,23 @@ function parentPage() {
           <button class="secondary full">儲存補充內容</button>
         </form>
 
+        <div class="section-head"><h2>☁ 雲端自動同步（Google 試算表）</h2></div>
+        <div class="card">
+          <form id="cloudConfigForm" class="form-grid">
+            <label class="wide">Apps Script 網頁應用程式網址（/exec 結尾）
+              <input name="url" type="url" value="\${esc(getCloudConfig().url)}" placeholder="https://script.google.com/macros/s/.../exec">
+            </label>
+            <label class="wide">自訂同步密鑰（需與 Code.gs 的 SECRET_TOKEN 一致）
+              <input name="token" type="text" value="\${esc(getCloudConfig().token)}" placeholder="例如：xu2026sync">
+            </label>
+            <div class="toolbar wide">
+              <button class="primary" type="submit">儲存設定並立即同步</button>
+              <button id="manualPullBtn" class="secondary" type="button">↓ 從雲端拉取合併</button>
+            </div>
+          </form>
+          <p class="subtext" style="margin-top:10px">設定完成後，每次新增、打卡、編輯或兌換獎勵都會自動同步到你們的 Google 試算表，爸爸與媽媽的手機電腦即可共用最新紀錄。</p>
+        </div>
+
         <div class="section-head"><h2>🔐 密碼與安全設定</h2></div>
         <div class="card">
           <form id="familyPinForm" class="form-grid" style="align-items:end;padding-bottom:16px;border-bottom:1px solid var(--line)">
@@ -1046,6 +1194,7 @@ function render() {
   });
   document.querySelectorAll('[data-confirm-del]').forEach(b => b.onclick = () => {
     const [type, id] = b.dataset.confirmDel.split(':');
+    db.deletedIds = [...(db.deletedIds || []), id].slice(-200);
     if (type === 'log') data().logs = data().logs.filter(x => x.id !== id);
     if (type === 'session') data().sessions = data().sessions.filter(x => x.id !== id);
     if (type === 'customTask') data().customTasks = (data().customTasks || []).filter(x => x.id !== id);
@@ -1085,6 +1234,21 @@ function render() {
       save();
       toast('補充內容已儲存。');
     };
+  }
+
+  if ($('#cloudConfigForm')) {
+    $('#cloudConfigForm').onsubmit = e => {
+      e.preventDefault();
+      const fd = Object.fromEntries(new FormData(e.target));
+      localStorage.setItem(cloudConfigKey, JSON.stringify({
+        url: (fd.url || '').toString().trim(),
+        token: (fd.token || '').toString().trim()
+      }));
+      pullFromCloud(false);
+    };
+  }
+  if ($('#manualPullBtn')) {
+    $('#manualPullBtn').onclick = () => pullFromCloud(false);
   }
 
   if ($('#familyPinForm')) {
@@ -1191,7 +1355,7 @@ $('#editLogForm').onsubmit = e => {
   const updated = Object.fromEntries(new FormData(e.target));
   const idx = data().logs.findIndex(x => x.id === updated.id);
   if (idx !== -1) {
-    data().logs[idx] = { ...data().logs[idx], ...updated };
+    data().logs[idx] = { ...data().logs[idx], ...updated, updatedAt: Date.now() };
     save();
     $('#editLogModal').close();
     render();
@@ -1223,7 +1387,8 @@ $('#editSessionForm').onsubmit = e => {
       level: fd.level,
       planned: Math.max(1, Number(fd.planned)),
       elapsed: Math.max(0, Number(fd.elapsed)),
-      distractions: Math.max(0, Number(fd.distractions))
+      distractions: Math.max(0, Number(fd.distractions)),
+      updatedAt: Date.now()
     };
     save();
     $('#editSessionModal').close();
@@ -1398,5 +1563,18 @@ $('#date').textContent = new Intl.DateTimeFormat('zh-TW', {
   weekday: 'long'
 }).format(new Date());
 
+if ($('#syncStatusBtn')) {
+  $('#syncStatusBtn').onclick = () => {
+    const cfg = getCloudConfig();
+    if (!cfg.url) {
+      toast('請先於「家長檢視 → 雲端自動同步」填入 Apps Script 網址。');
+      return;
+    }
+    pullFromCloud(false);
+  };
+}
 updateAuthUI();
-if (isLoggedIn()) render();
+if (isLoggedIn()) {
+  render();
+  pullFromCloud(true);
+}
