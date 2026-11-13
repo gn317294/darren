@@ -52,7 +52,7 @@
         <div id="date"></div>
       </div>
       <div class="header-actions">
-        <button id="syncStatusBtn" class="ghost-btn btn-sm" type="button" title="點擊立即同步">☁ 尚未設定雲端</button>
+        <button id="syncStatusBtn" class="ghost-btn btn-sm" type="button" title="點擊立即同步">☁ 雲端同步</button>
         <button id="parentAuthBtn" class="secondary btn-sm" type="button">🔒 家長模式</button>
         <button id="logoutBtn" class="ghost-btn btn-sm" type="button">登出</button>
         <div class="family-badge">☀ <span>徐家的小小練習室</span></div>
@@ -83,7 +83,7 @@
     <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
     <span class="eyebrow">家長專屬操作保護</span>
     <h2>請輸入家長操作密碼</h2>
-    <p id="parentPinDesc">此操作（家長檢視、編輯／刪除紀錄、兌換獎勵）需由家長確認。</p>
+    <p id="parentPinDesc">此操作（家長檢視、編輯／刪除紀錄、核准獎勵）需由家長確認。</p>
     <form id="parentPinForm">
       <label>家長操作密碼
         <input id="parentPinInput" type="password" required placeholder="請輸入家長密碼">
@@ -96,7 +96,7 @@
     </form>
   </dialog>
 
-  <!-- 練習計時彈窗 -->
+  <!-- 練習計時與打卡彈窗 -->
   <dialog id="exercise" class="no-print">
     <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
     <span class="eyebrow">留一小段時間，陪自己練習</span>
@@ -111,11 +111,145 @@
       <button id="resetTimer" class="secondary" type="button">重新計時</button>
     </div>
     <div class="prompt" id="exercisePrompt"></div>
-    <label>練習中的分心次數
-      <input id="sessionDistraction" type="number" min="0" max="999" value="0">
-    </label>
-    <button id="finishTask" class="primary full" type="button">✓ 完成練習並打卡（+1 🌸）</button>
-    <small>可以暫停、提早結束；陪伴比完成速度重要。打卡不會自動發生。</small>
+    <div class="form-grid" style="margin-bottom:12px">
+      <label>練習中的分心次數
+        <input id="sessionDistraction" type="number" min="0" max="999" value="0">
+      </label>
+      <label>本次達成與獎勵小花
+        <select id="sessionEarned">
+          <option value="default">依任務預設小花</option>
+          <option value="1">願意嘗試並開始執行（+1 🌸）</option>
+          <option value="2">完成簡單任務（+2 🌸）</option>
+          <option value="3">完成需要持續努力的任務（+3 🌸）</option>
+          <option value="4">完成較高難度或延長任務（+4 🌸）</option>
+        </select>
+      </label>
+    </div>
+    <button id="finishTask" class="primary full" type="button">✓ 完成練習並領取小花 🌸</button>
+    <small>可以暫停、提早結束；生氣或失敗不等於沒進步，願意嘗試與重新開始都值得鼓勵。</small>
+  </dialog>
+
+  <!-- 新增/編輯任務彈窗 -->
+  <dialog id="editTaskModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">任務設定管理</span>
+    <h2 id="editTaskModalTitle">編輯任務設定</h2>
+    <form id="editTaskForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label>任務名稱（含圖示）
+        <input name="title" required placeholder="例如：🎯 專心完成5分鐘任務">
+      </label>
+      <label>顯示圖示
+        <input name="icon" maxlength="4" placeholder="🎯" value="🌱">
+      </label>
+      <label>任務分類
+        <select name="category">
+          <option value="專注力訓練">A. 專注力訓練</option>
+          <option value="作業習慣">B. 作業習慣</option>
+          <option value="情緒管理">C. 情緒管理</option>
+          <option value="自我控制">D. 自我控制</option>
+          <option value="生活自理">E. 生活自理</option>
+          <option value="親子互動">F. 親子互動</option>
+        </select>
+      </label>
+      <label>適用孩子
+        <select name="target">
+          <option value="both">兩人皆適用</option>
+          <option value="girl">徐彗瑄</option>
+          <option value="boy">徐邦盛</option>
+        </select>
+      </label>
+      <label>任務難度
+        <select name="difficulty">
+          <option value="easy">簡單（輕鬆起步）</option>
+          <option value="normal">一般（穩穩練習）</option>
+          <option value="challenge">進階（小小挑戰）</option>
+        </select>
+      </label>
+      <label>預估時間（1～15 分鐘）
+        <input name="minutes" type="number" min="1" max="15" value="5" required>
+      </label>
+      <label>完成獎勵小花（1～4 朵）
+        <input name="flowers" type="number" min="1" max="10" value="2" required>
+      </label>
+      <label>每日完成次數上限
+        <input name="maxDaily" type="number" min="1" max="10" value="1" required>
+      </label>
+      <label>加入每日智慧推薦池
+        <select name="recommend">
+          <option value="true">是（納入推薦）</option>
+          <option value="false">否（僅手動選擇）</option>
+        </select>
+      </label>
+      <label>任務狀態
+        <select name="active">
+          <option value="true">啟用中</option>
+          <option value="false">已停用</option>
+        </select>
+      </label>
+      <label class="wide">任務說明
+        <input name="desc" required placeholder="簡短說明任務做法">
+      </label>
+      <label class="wide">家長引導語（協助孩子執行的溫和說法）
+        <textarea name="promptText" rows="2" required placeholder="例如：「我們先完成這一小段就好。」"></textarea>
+      </label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存任務</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 新增/編輯獎勵彈窗 -->
+  <dialog id="editRewardModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">集點商店管理</span>
+    <h2 id="editRewardModalTitle">編輯獎勵項目</h2>
+    <form id="editRewardForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label class="wide">獎勵內容（含圖示）
+        <input name="title" required placeholder="例如：📖 自己選今天的睡前故事">
+      </label>
+      <label>顯示圖示
+        <input name="icon" maxlength="4" value="🎁">
+      </label>
+      <label>獎勵類別
+        <select name="category">
+          <option value="日常小確幸">A. 日常小確幸</option>
+          <option value="親子陪伴">B. 親子陪伴</option>
+          <option value="生活選擇權">C. 生活選擇權</option>
+          <option value="戶外活動">D. 戶外活動</option>
+          <option value="實體獎勵">E. 實體獎勵</option>
+        </select>
+      </label>
+      <label>所需小花數量（🌸）
+        <input name="cost" type="number" min="1" max="200" value="3" required>
+      </label>
+      <label>適用孩子
+        <select name="target">
+          <option value="both">兩人皆可兌換</option>
+          <option value="girl">徐彗瑄</option>
+          <option value="boy">徐邦盛</option>
+        </select>
+      </label>
+      <label>兌換次數上限（0 代表不限）
+        <input name="limit" type="number" min="0" max="999" value="0">
+      </label>
+      <label>實體獎勵參考預算（元，選填）
+        <input name="budget" type="number" min="0" max="10000" placeholder="非實體獎勵可留白">
+      </label>
+      <label>獎勵狀態
+        <select name="active">
+          <option value="true">上架啟用中</option>
+          <option value="false">暫時停用</option>
+        </select>
+      </label>
+      <label class="wide">備註說明（選填）
+        <input name="note" placeholder="例如：睡前聊天不能影響原本就寢時間，可提前安排">
+      </label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存獎勵</button>
+      </div>
+    </form>
   </dialog>
 
   <!-- 編輯日常紀錄彈窗 -->
@@ -206,7 +340,8 @@
       </label>
       <label>安排分鐘數<input name="planned" type="number" min="1" max="120" required></label>
       <label>實際計時（秒）<input name="elapsed" type="number" min="0" max="7200" required></label>
-      <label class="wide">分心次數<input name="distractions" type="number" min="0" max="999" required></label>
+      <label>分心次數<input name="distractions" type="number" min="0" max="999" required></label>
+      <label>獲得小花（🌸）<input name="earned" type="number" min="1" max="10" required></label>
       <div class="wide modal-actions">
         <button type="submit" class="primary">儲存修改</button>
       </div>
