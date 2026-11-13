@@ -941,18 +941,23 @@ function parentPage() {
 
         <div class="section-head"><h2>🔐 密碼與安全設定</h2></div>
         <div class="card">
-          <form id="pinChangeForm" class="form-grid">
-            <label>新的家庭登入密碼（留空則不修改）
-              <input name="newFamilyPin" type="password" minlength="4" placeholder="至少 4 碼">
+          <form id="familyPinForm" class="form-grid" style="align-items:end;padding-bottom:16px;border-bottom:1px solid var(--line)">
+            <label>全家登入密碼 <small class="subtext">（目前：${db.auth.isDefaultFamily ? '預設 2026' : '已自訂'}）</small>
+              <input name="newFamilyPin" type="text" minlength="4" required placeholder="輸入新的全家登入密碼（至少 4 碼）">
             </label>
-            <label>新的家長操作密碼（留空則不修改）
-              <input name="newParentPin" type="password" minlength="4" placeholder="至少 4 碼">
-            </label>
-            <div class="wide">
-              <button class="secondary full" type="submit">更新密碼設定</button>
+            <div>
+              <button class="secondary full" style="margin-top:0" type="submit">更新全家登入密碼</button>
             </div>
           </form>
-          <p class="subtext" style="margin-top:10px">修改後會儲存在瀏覽器與 JSON 備份中。交給孩子使用前，可點右上方「🔓 家長已解鎖」一鍵鎖回。</p>
+          <form id="parentPinChangeForm" class="form-grid" style="align-items:end;margin-top:16px">
+            <label>家長操作密碼 <small class="subtext">（目前：${db.auth.isDefaultParent ? '預設 9999' : '已自訂'}）</small>
+              <input name="newParentPin" type="text" minlength="4" required placeholder="輸入新的家長操作密碼（至少 4 碼）">
+            </label>
+            <div>
+              <button class="secondary full" style="margin-top:0" type="submit">更新家長操作密碼</button>
+            </div>
+          </form>
+          <p class="subtext" style="margin-top:12px">兩組密碼可分開獨立修改，修改後會即時儲存於瀏覽器並寫入 JSON 備份。交給孩子使用前，可點右上方「🔓 家長已解鎖」一鍵鎖回。</p>
         </div>
       </div>
 
@@ -1086,28 +1091,29 @@ function render() {
     };
   }
 
-  if ($('#pinChangeForm')) {
-    $('#pinChangeForm').onsubmit = e => {
+  if ($('#familyPinForm')) {
+    $('#familyPinForm').onsubmit = e => {
       e.preventDefault();
-      const fd = Object.fromEntries(new FormData(e.target));
-      let changed = false;
-      if (fd.newFamilyPin && fd.newFamilyPin.trim()) {
-        db.auth.familyHash = hashPin(fd.newFamilyPin.trim());
-        db.auth.isDefaultFamily = false;
-        changed = true;
-      }
-      if (fd.newParentPin && fd.newParentPin.trim()) {
-        db.auth.parentHash = hashPin(fd.newParentPin.trim());
-        db.auth.isDefaultParent = false;
-        changed = true;
-      }
-      if (!changed) {
-        toast('請至少輸入一組新密碼。');
-        return;
-      }
+      const pin = new FormData(e.target).get('newFamilyPin')?.toString().trim();
+      if (!pin || pin.length < 4) { toast('全家登入密碼請至少輸入 4 碼。'); return; }
+      db.auth.familyHash = hashPin(pin);
+      db.auth.isDefaultFamily = false;
       save();
-      e.target.reset();
-      toast('密碼設定已更新！');
+      render();
+      toast('全家登入密碼已更新！下次登入請使用新密碼。');
+    };
+  }
+
+  if ($('#parentPinChangeForm')) {
+    $('#parentPinChangeForm').onsubmit = e => {
+      e.preventDefault();
+      const pin = new FormData(e.target).get('newParentPin')?.toString().trim();
+      if (!pin || pin.length < 4) { toast('家長操作密碼請至少輸入 4 碼。'); return; }
+      db.auth.parentHash = hashPin(pin);
+      db.auth.isDefaultParent = false;
+      save();
+      render();
+      toast('家長操作密碼已更新！');
     };
   }
 
