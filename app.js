@@ -677,21 +677,9 @@ function rewardsWidgetHTML() {
 
 function renderBackupBanner() {
   const banner = $('#backupBanner');
-  const hasData = db.children.girl.logs.length + db.children.girl.sessions.length + db.children.boy.logs.length + db.children.boy.sessions.length > 0;
-  const daysSince = db.lastBackupAt ? Math.floor((Date.now() - db.lastBackupAt) / 86400000) : null;
-  const needBackup = (page === 'home' || (page === 'parent' && isParentUnlocked())) && ((daysSince === null && hasData) || (daysSince !== null && daysSince >= 7));
-  if (!needBackup) {
-    banner.hidden = true;
-    banner.innerHTML = '';
-    return;
-  }
-  banner.hidden = false;
-  banner.innerHTML = `
-    <span>☁ ${daysSince === null ? '目前尚未匯出過備份檔案' : `距離上次 JSON 備份已過 ${daysSince} 天`}，建議匯出檔案方便爸爸與媽媽跨裝置同步。</span>
-    <div class="banner-actions">
-      <button id="bannerExportBtn" class="secondary btn-sm" type="button">↓ 立即匯出備份</button>
-    </div>`;
-  $('#bannerExportBtn').onclick = exportData;
+  if (!banner) return;
+  banner.hidden = true;
+  banner.innerHTML = '';
 }
 
 function home() {
@@ -741,7 +729,7 @@ function home() {
         ${rewardsWidgetHTML()}
       </div>
     </div>
-    <p class="notice">✳ 這是日常陪伴與觀察工具，不提供診斷。資料僅儲存在此瀏覽器；換裝置前請於家長檢視匯出備份。</p>`;
+    <p class="notice">✳ 這是日常陪伴與觀察工具，不提供診斷。資料已啟用 Google 試算表雲端自動同步，爸爸與媽媽可跨裝置共用紀錄。</p>`;
 }
 
 function settings() {
@@ -1115,14 +1103,9 @@ function parentPage() {
 
       <div>
         <div class="card tip" style="margin:0">
-          <h3>資料與備份</h3>
-          <p>資料只存在目前瀏覽器，不會跨裝置同步。定期匯出 JSON，方便爸爸與媽媽在手機或電腦間同步。</p>
-          <p><b>上次備份：</b>${db.lastBackupAt ? new Date(db.lastBackupAt).toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }) : '尚未記錄'}</p>
-          <button id="export" class="secondary full" type="button">↓ 匯出兩位孩子的紀錄</button>
-          <label class="secondary full" style="display:block;text-align:center;cursor:pointer">↑ 匯入備份
-            <input id="import" type="file" accept="application/json,.json" style="display:none">
-          </label>
-          <p>匯入會合併紀錄並略過重複項目；原有資料會保留。</p>
+          <h3>☁ 雲端自動同步</h3>
+          <p>所有日常觀察、練習打卡、獎勵與密碼設定都會自動儲存並同步至你們的 Google 試算表，無需手動匯出或匯入備份。</p>
+          <button id="sidePullBtn" class="secondary full" type="button">↻ 立即同步雲端最新資料</button>
         </div>
         <div class="card tip">
           <h3>陪伴，不是評分</h3>
@@ -1346,9 +1329,8 @@ function render() {
     $('#printSummary').onclick = () => window.print();
   }
 
-  if ($('#export')) {
-    $('#export').onclick = exportData;
-    $('#import').onchange = importData;
+  if ($('#sidePullBtn')) {
+    $('#sidePullBtn').onclick = () => pullFromCloud(false);
   }
 }
 
