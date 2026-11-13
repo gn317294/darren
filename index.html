@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小步日常 · 家庭練習花園</title>
+  <meta name="description" content="彗瑄與邦盛的家庭日常練習與觀察紀錄">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="no-print">
+    <a class="brand" href="#home">
+      <span class="logo">✳</span> 小步日常
+      <small>FAMILY GROWTH GARDEN</small>
+    </a>
+    <div class="side-label">我們的練習花園</div>
+    <nav>
+      <a href="#home">⌂ <span>首頁</span></a>
+      <a href="#tasks">◷ <span>今日任務</span></a>
+      <a href="#records">▤ <span>日常紀錄</span></a>
+      <a href="#parent">◈ <span>家長檢視</span></a>
+    </nav>
+    <div class="sidebar-note">
+      <span>🌱</span>
+      <b>每一小步，都算數。</b>
+      <p>慢慢練習，陪孩子找到<br>自己的節奏。</p>
+    </div>
+    <footer>家庭陪伴工具<br>不作為醫療診斷或治療</footer>
+  </aside>
+
+  <main>
+    <header class="no-print">
+      <div>
+        <span class="eyebrow">一起練習，一起長大</span>
+        <div id="date"></div>
+      </div>
+      <div class="family-badge">☀ <span>徐家的小小練習室</span></div>
+    </header>
+
+    <div class="children no-print">
+      <button data-child="girl">
+        <span class="avatar girl">瑄</span>
+        <span><b>徐彗瑄</b><small>8 歲 · 小學三年級</small></span>
+        <i>✓</i>
+      </button>
+      <button data-child="boy">
+        <span class="avatar boy">盛</span>
+        <span><b>徐邦盛</b><small>6 歲 · 小學一年級</small></span>
+        <i>✓</i>
+      </button>
+      <span class="switch-help">每個孩子，都有自己的節奏</span>
+    </div>
+
+    <div id="backupBanner" class="backup-banner no-print" hidden></div>
+    <div id="app"></div>
+    <div id="toast" class="no-print" role="status"></div>
+  </main>
+
+  <!-- 練習計時彈窗 -->
+  <dialog id="exercise" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">留一小段時間，陪自己練習</span>
+    <h2 id="exerciseTitle"></h2>
+    <p id="exerciseInstructions"></p>
+    <div class="timer" id="timer">
+      <strong id="clock">05:00</strong>
+      <span>專心在這一小步</span>
+    </div>
+    <div class="timer-controls">
+      <button id="toggleTimer" class="primary" type="button">開始計時</button>
+      <button id="resetTimer" class="secondary" type="button">重新計時</button>
+    </div>
+    <div class="prompt" id="exercisePrompt"></div>
+    <label>練習中的分心次數
+      <input id="sessionDistraction" type="number" min="0" max="999" value="0">
+    </label>
+    <button id="finishTask" class="primary full" type="button">✓ 完成練習並打卡（+1 🌸）</button>
+    <small>可以暫停、提早結束；陪伴比完成速度重要。打卡不會自動發生。</small>
+  </dialog>
+
+  <!-- 編輯日常紀錄彈窗 -->
+  <dialog id="editLogModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">修正觀察紀錄</span>
+    <h2>編輯日常觀察</h2>
+    <form id="editLogForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label>紀錄日期<input name="date" type="date" required></label>
+      <label>觀察情境
+        <select name="context">
+          <option value="">尚未填寫</option>
+          <option>寫作業</option>
+          <option>閱讀</option>
+          <option>學校回饋</option>
+          <option>家庭活動</option>
+          <option>練習活動</option>
+        </select>
+      </label>
+      <label>情緒
+        <select name="mood">
+          <option value="">尚未觀察</option>
+          <option>平穩</option>
+          <option>開心</option>
+          <option>煩躁</option>
+          <option>生氣</option>
+          <option>難過</option>
+        </select>
+      </label>
+      <label>精神狀態
+        <select name="energy">
+          <option value="">尚未觀察</option>
+          <option>精神不錯</option>
+          <option>有點累</option>
+          <option>很想睡</option>
+        </select>
+      </label>
+      <label>分心次數<input name="distractions" type="number" min="0" max="999" placeholder="未知請留白"></label>
+      <label>家長提醒次數<input name="reminders" type="number" min="0" max="999" placeholder="未知請留白"></label>
+      <label>作業投入時間（分鐘）<input name="homework" type="number" min="0" max="600" placeholder="未知請留白"></label>
+      <label>恢復平靜時間（分鐘）<input name="calmMinutes" type="number" min="0" max="600" placeholder="未知請留白"></label>
+      <label class="wide">發生了什麼？什麼方式有幫助？
+        <textarea name="note" maxlength="2000"></textarea>
+      </label>
+      <label>昨晚上床時間<input type="time" name="bed"></label>
+      <label>昨晚估計入睡時間<input type="time" name="asleep"></label>
+      <label>今天起床時間<input type="time" name="wake"></label>
+      <label>估計睡眠時數<input name="sleepHours" type="number" min="0" max="24" step="0.1"></label>
+      <label>打呼／鼻塞
+        <select name="snore">
+          <option value="">未知／未觀察</option>
+          <option>無觀察到</option>
+          <option>打呼</option>
+          <option>鼻塞</option>
+          <option>打呼與鼻塞</option>
+        </select>
+      </label>
+      <label>白天想睡的情境
+        <select name="sleepy">
+          <option value="">未知／未觀察</option>
+          <option>沒有觀察到</option>
+          <option>坐著看書</option>
+          <option>上課或考試</option>
+          <option>其他活動</option>
+        </select>
+      </label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存修改</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 編輯練習打卡紀錄彈窗 -->
+  <dialog id="editSessionModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">修正打卡紀錄</span>
+    <h2>編輯練習紀錄</h2>
+    <form id="editSessionForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label>日期<input name="date" type="date" required></label>
+      <label>難度
+        <select name="level">
+          <option value="輕鬆起步">輕鬆起步</option>
+          <option value="穩穩練習">穩穩練習</option>
+          <option value="小小挑戰">小小挑戰</option>
+        </select>
+      </label>
+      <label>安排分鐘數<input name="planned" type="number" min="1" max="120" required></label>
+      <label>實際計時（秒）<input name="elapsed" type="number" min="0" max="7200" required></label>
+      <label class="wide">分心次數<input name="distractions" type="number" min="0" max="999" required></label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存修改</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
