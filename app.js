@@ -98,7 +98,8 @@ function normalizeDB(raw) {
       familyHash: hashPin(DEFAULT_FAMILY_PIN),
       parentHash: hashPin(DEFAULT_PARENT_PIN),
       isDefaultFamily: true,
-      isDefaultParent: true
+      isDefaultParent: true,
+      updatedAt: 0
     },
     children: {
       girl: makeDefaultChild('girl'),
@@ -118,6 +119,7 @@ function normalizeDB(raw) {
       base.auth.parentHash = raw.auth.parentHash;
       base.auth.isDefaultParent = Boolean(raw.auth.isDefaultParent);
     }
+    base.auth.updatedAt = typeof raw.auth.updatedAt === 'number' ? raw.auth.updatedAt : 0;
   }
   for (const c of ['girl', 'boy']) {
     const src = raw.children[c];
@@ -190,9 +192,12 @@ function requireParentAuth(desc, onSuccess) {
   $('#parentPinModal').showModal();
 }
 
-$('#loginForm').onsubmit = e => {
+$('#loginForm').onsubmit = async e => {
   e.preventDefault();
   const pin = $('#loginPassword').value.trim();
+  if (hashPin(pin) !== db.auth.familyHash && getCloudConfig().url) {
+    await pullFromCloud(true);
+  }
   if (hashPin(pin) === db.auth.familyHash) {
     sessionStorage.setItem(sessionLoginKey, '1');
     $('#loginPassword').value = '';
@@ -205,9 +210,12 @@ $('#loginForm').onsubmit = e => {
   }
 };
 
-$('#parentPinForm').onsubmit = e => {
+$('#parentPinForm').onsubmit = async e => {
   e.preventDefault();
   const pin = $('#parentPinInput').value.trim();
+  if (hashPin(pin) !== db.auth.parentHash && getCloudConfig().url) {
+    await pullFromCloud(true);
+  }
   if (hashPin(pin) === db.auth.parentHash) {
     sessionStorage.setItem(sessionParentKey, '1');
     $('#parentPinModal').close();
@@ -389,8 +397,8 @@ function mergeDatasets(localData, incoming) {
   const delSet = new Set([...(localData.deletedIds || []), ...(incoming.deletedIds || [])]);
   merged.deletedIds = Array.from(delSet).slice(-200);
 
-  if ((incoming.updatedAt || 0) > (localData.updatedAt || 0) && incoming.auth && typeof incoming.auth.familyHash === 'string') {
-    merged.auth = incoming.auth;
+  if (incoming.auth && typeof incoming.auth.familyHash === 'string' && (incoming.auth.updatedAt || 0) > (localData.auth?.updatedAt || 0)) {
+    merged.auth = { ...incoming.auth };
   }
 
   for (const c of ['girl', 'boy']) {
@@ -1252,28 +1260,32 @@ function render() {
   }
 
   if ($('#familyPinForm')) {
-    $('#familyPinForm').onsubmit = e => {
+    $('#familyPinForm').onsubmit = async e => {
       e.preventDefault();
       const pin = new FormData(e.target).get('newFamilyPin')?.toString().trim();
       if (!pin || pin.length < 4) { toast('全家登入密碼請至少輸入 4 碼。'); return; }
       db.auth.familyHash = hashPin(pin);
       db.auth.isDefaultFamily = false;
-      save();
+      db.auth.updatedAt = Date.now();
+      save(true);
+      await pushToCloud();
       render();
-      toast('全家登入密碼已更新！下次登入請使用新密碼。');
+      toast('全家登入密碼已更新並同步至雲端！所有裝置將使用此新密碼。');
     };
   }
 
   if ($('#parentPinChangeForm')) {
-    $('#parentPinChangeForm').onsubmit = e => {
+    $('#parentPinChangeForm').onsubmit = async e => {
       e.preventDefault();
       const pin = new FormData(e.target).get('newParentPin')?.toString().trim();
       if (!pin || pin.length < 4) { toast('家長操作密碼請至少輸入 4 碼。'); return; }
       db.auth.parentHash = hashPin(pin);
       db.auth.isDefaultParent = false;
-      save();
+      db.auth.updatedAt = Date.now();
+      save(true);
+      await pushToCloud();
       render();
-      toast('家長操作密碼已更新！');
+      toast('家長操作密碼已更新並同步至雲端！所有裝置將使用此新密碼。');
     };
   }
 
@@ -1576,5 +1588,5 @@ if ($('#syncStatusBtn')) {
 updateAuthUI();
 if (isLoggedIn()) {
   render();
-  pullFromCloud(true);
 }
+pullFromCloud(true);
