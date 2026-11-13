@@ -163,7 +163,7 @@ function updateAuthUI() {
   $('#appMain').hidden = !logged;
   if (!logged) {
     $('#loginHint').textContent = db.auth.isDefaultFamily
-      ? `初次使用預設密碼：${DEFAULT_FAMILY_PIN}（進入後可於家長檢視修改）`
+    
       : '請輸入你們設定的家庭登入密碼。';
     return;
   }
