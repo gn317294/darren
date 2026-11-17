@@ -1,0 +1,12 @@
+name = "family-habit-garden"
+main = "src/main.ts"
+compatibility_date = "2024-11-01"
+
+[assets]
+directory = "./public"
+
+# 機密值請透過 `wrangler secret put SESSION_SECRET` 等指令設定於伺服器端，切勿寫入公開 repo（INV-1）
+# [[d1_databases]]
+# binding = "D1_DB"
+# database_name = "family_habit_garden_db"
+# database_id = "YOUR_D1_DATABASE_ID"

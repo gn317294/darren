@@ -1,0 +1,21 @@
+{
+  "name": "family-habit-garden-hono",
+  "version": "1.0.0",
+  "private": true,
+  "description": "單一家庭自用習慣練習與日常觀察 App（去識別化 + Hono 六角架構重製版）",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/domain/*.test.ts",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "hono": "^4.6.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241106.0",
+    "typescript": "^5.6.3",
+    "wrangler": "^3.86.0"
+  }
+}

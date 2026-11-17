@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小步日常 · 家庭習慣練習花園</title>
+  <meta name="description" content="單一家庭自用之習慣練習與日常觀察工具（非醫療用途）">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 全站家庭登入畫面（角色：訪客 → 家庭成員） -->
+  <div id="loginGate" class="login-gate">
+    <div class="login-card">
+      <div class="brand"><span class="logo">✳</span> 小步日常 <small>FAMILY HABIT GARDEN</small></div>
+      <h1>歡迎回到練習花園</h1>
+      <p>為了保護家庭日常紀錄與隱私，請先輸入家庭登入密碼。</p>
+      <form id="loginForm">
+        <label>家庭登入密碼
+          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="請輸入家庭密碼">
+        </label>
+        <div id="loginError" class="form-error" hidden>密碼不正確，請再試一次。</div>
+        <button class="primary full" type="submit">進入練習花園 →</button>
+      </form>
+    </div>
+  </div>
+
+  <aside id="appAside" class="no-print" hidden>
+    <a class="brand" href="#home">
+      <span class="logo">✳</span> 小步日常
+      <small>FAMILY HABIT GARDEN</small>
+    </a>
+    <div class="side-label">我們的練習花園</div>
+    <nav>
+      <a href="#home">⌂ <span>首頁</span></a>
+      <a href="#tasks">◷ <span>今日任務</span></a>
+      <a href="#records">▤ <span>日常紀錄</span></a>
+      <a href="#parent">◈ <span>家長檢視</span> <em id="parentLockBadge" class="lock-dot">🔒</em></a>
+    </nav>
+    <div class="sidebar-note">
+      <span>🌱</span>
+      <b>每一小步，都算數。</b>
+      <p>陪你一小步，失敗也算練習。<br>慢慢找到自己的節奏。</p>
+    </div>
+    <footer>家庭陪伴與行為觀察工具<br>非醫療診斷或評估用途</footer>
+  </aside>
+
+  <main id="appMain" hidden>
+    <header class="no-print">
+      <div>
+        <span class="eyebrow">一起練習，一起長大</span>
+        <div id="date"></div>
+      </div>
+      <div class="header-actions">
+        <button id="syncStatusBtn" class="ghost-btn btn-sm" type="button" title="點擊立即與伺服器同步">☁ 已同步</button>
+        <button id="parentAuthBtn" class="secondary btn-sm" type="button">🔒 家長模式</button>
+        <button id="logoutBtn" class="ghost-btn btn-sm" type="button">登出</button>
+      </div>
+    </header>
+
+    <!-- 序位切換（僅以序位 child1 / child2 區分，不含生日/年齡/年級/性別） -->
+    <div class="children no-print">
+      <button data-child="child1" type="button">
+        <span class="avatar girl">瑄</span>
+        <span><b id="labelChild1">彗瑄</b><small>小學生 · 獨立節奏</small></span>
+        <i>✓</i>
+      </button>
+      <button data-child="child2" type="button">
+        <span class="avatar boy">盛</span>
+        <span><b id="labelChild2">邦盛</b><small>小學生 · 獨立節奏</small></span>
+        <i>✓</i>
+      </button>
+      <span class="switch-help">每個孩子，都有自己的節奏</span>
+    </div>
+
+    <div id="app"></div>
+    <div id="toast" class="no-print" role="status"></div>
+  </main>
+
+  <!-- 家長密碼驗證彈窗（角色：家庭成員 → 家長） -->
+  <dialog id="parentPinModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">家長專屬操作保護</span>
+    <h2>請輸入家長操作密碼</h2>
+    <p id="parentPinDesc">此操作（家長檢視、編輯／刪除紀錄、核准兌換、管理任務與獎勵）需由家長確認。</p>
+    <form id="parentPinForm">
+      <label>家長操作密碼
+        <input id="parentPinInput" type="password" required placeholder="請輸入家長密碼">
+      </label>
+      <div id="parentPinError" class="form-error" hidden>家長密碼不正確，請再試一次。</div>
+      <div class="modal-actions">
+        <button type="submit" class="primary">確認解鎖</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 練習打卡彈窗（規格 1.3 & 2.3a 四級得點選擇） -->
+  <dialog id="exercise" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">留一小段時間，陪自己練習</span>
+    <h2 id="exerciseTitle"></h2>
+    <p id="exerciseInstructions"></p>
+    <div class="timer" id="timer">
+      <strong id="clock">05:00</strong>
+      <span>專心在這一小步</span>
+    </div>
+    <div class="timer-controls">
+      <button id="toggleTimer" class="primary" type="button">開始計時</button>
+      <button id="resetTimer" class="secondary" type="button">重新計時</button>
+    </div>
+    <div class="prompt" id="exercisePrompt"></div>
+    <div class="form-grid" style="margin-bottom:12px">
+      <label>練習中的分心次數
+        <input id="sessionDistraction" type="number" min="0" max="999" value="0">
+      </label>
+      <label>本次得點選擇（2.3a 規則）
+        <select id="sessionEarned">
+          <option value="default">採任務預設點數</option>
+          <option value="1">+1 願意嘗試並開始執行</option>
+          <option value="2">+2 完成簡單任務</option>
+          <option value="3">+3 完成需要持續努力的任務</option>
+          <option value="4">+4 完成較高難度或延長任務</option>
+        </select>
+      </label>
+    </div>
+    <button id="finishTask" class="primary full" type="button">✓ 完成練習並領取點數 🌸</button>
+    <small>陪你一小步，失敗也算練習；可以暫停或提早結束，願意嘗試就值得鼓勵。</small>
+  </dialog>
+
+  <!-- 新增/編輯任務彈窗（規格 2.3d 完整欄位） -->
+  <dialog id="editTaskModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">任務設定管理</span>
+    <h2 id="editTaskModalTitle">編輯任務設定</h2>
+    <form id="editTaskForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label>任務名稱
+        <input name="title" required placeholder="例如：🎯 專心完成 5 分鐘任務">
+      </label>
+      <label>顯示圖示
+        <input name="icon" maxlength="4" placeholder="🎯" value="🌱">
+      </label>
+      <label>任務分類（大類）
+        <select name="category">
+          <option value="專注力訓練">專注力訓練</option>
+          <option value="作業習慣">作業習慣</option>
+          <option value="情緒管理">情緒管理</option>
+          <option value="自我控制">自我控制</option>
+          <option value="生活自理">生活自理</option>
+          <option value="親子互動">親子互動</option>
+        </select>
+      </label>
+      <label>適用對象（序位代號）
+        <select name="target">
+          <option value="both">兩人皆適用 (both)</option>
+          <option value="child1">彗瑄 (child1)</option>
+          <option value="child2">邦盛 (child2)</option>
+        </select>
+      </label>
+      <label>任務難度
+        <select name="difficulty">
+          <option value="easy">簡單 (easy)</option>
+          <option value="normal">一般 (normal)</option>
+          <option value="challenge">進階 (challenge)</option>
+        </select>
+      </label>
+      <label>預估時間（1～15 分鐘）
+        <input name="minutes" type="number" min="1" max="15" value="5" required>
+      </label>
+      <label>預設得點（flowers）
+        <input name="flowers" type="number" min="1" max="10" value="2" required>
+      </label>
+      <label>每日次數上限（maxDaily）
+        <input name="maxDaily" type="number" min="1" max="10" value="1" required>
+      </label>
+      <label>加入智慧推薦池（recommend）
+        <select name="recommend">
+          <option value="true">是</option>
+          <option value="false">否</option>
+        </select>
+      </label>
+      <label>啟用狀態（active）
+        <select name="active">
+          <option value="true">啟用中</option>
+          <option value="false">已停用</option>
+        </select>
+      </label>
+      <label class="wide">任務說明（desc）
+        <input name="desc" required placeholder="簡短說明任務做法">
+      </label>
+      <label class="wide">溫和引導語（promptText）
+        <textarea name="promptText" rows="2" required placeholder="例如：「我們先完成這一小段就好，失敗也算練習。」"></textarea>
+      </label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存任務</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 新增/編輯獎勵彈窗（規格 2.3e 完整欄位） -->
+  <dialog id="editRewardModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">集點商店管理</span>
+    <h2 id="editRewardModalTitle">編輯獎勵項目</h2>
+    <form id="editRewardForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label class="wide">獎勵內容（title）
+        <input name="title" required placeholder="例如：📖 選擇親子共讀故事">
+      </label>
+      <label>顯示圖示（icon）
+        <input name="icon" maxlength="4" value="🎁">
+      </label>
+      <label>獎勵大類（category）
+        <select name="category">
+          <option value="日常小確幸">日常小確幸</option>
+          <option value="親子陪伴">親子陪伴</option>
+          <option value="生活選擇權">生活選擇權</option>
+          <option value="戶外活動">戶外活動</option>
+          <option value="實體獎勵">實體獎勵</option>
+        </select>
+      </label>
+      <label>所需點數（cost）
+        <input name="cost" type="number" min="1" max="500" value="15" required>
+      </label>
+      <label>適用對象（target）
+        <select name="target">
+          <option value="both">兩人皆可兌換 (both)</option>
+          <option value="child1">彗瑄 (child1)</option>
+          <option value="child2">邦盛 (child2)</option>
+        </select>
+      </label>
+      <label>兌換上限（limit，0=不限）
+        <input name="limit" type="number" min="0" max="999" value="0">
+      </label>
+      <label>參考預算（budget，選填）
+        <input name="budget" type="number" min="0" max="10000" placeholder="選填">
+      </label>
+      <label>狀態（active）
+        <select name="active">
+          <option value="true">上架啟用中</option>
+          <option value="false">暫時停用</option>
+        </select>
+      </label>
+      <label class="wide">備註說明（note，選填）
+        <input name="note" placeholder="選填備註">
+      </label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存獎勵</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 編輯日常紀錄彈窗（規格 2.4 Log 完整欄位含睡眠組） -->
+  <dialog id="editLogModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">修正觀察紀錄</span>
+    <h2>編輯日常觀察</h2>
+    <form id="editLogForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label>紀錄日期<input name="date" type="date" required></label>
+      <label>觀察情境
+        <select name="context">
+          <option value="">尚未填寫</option>
+          <option>寫作業</option>
+          <option>閱讀</option>
+          <option>學校回饋</option>
+          <option>家庭活動</option>
+          <option>練習活動</option>
+        </select>
+      </label>
+      <label>情緒
+        <select name="mood">
+          <option value="">尚未觀察</option>
+          <option>平穩</option>
+          <option>開心</option>
+          <option>煩躁</option>
+          <option>生氣</option>
+          <option>難過</option>
+        </select>
+      </label>
+      <label>精神狀態
+        <select name="energy">
+          <option value="">尚未觀察</option>
+          <option>精神不錯</option>
+          <option>有點累</option>
+          <option>很想睡</option>
+        </select>
+      </label>
+      <label>分心次數<input name="distractions" type="number" min="0" max="999" placeholder="未知請留白"></label>
+      <label>家長提醒次數<input name="reminders" type="number" min="0" max="999" placeholder="未知請留白"></label>
+      <label>作業投入時間（分）<input name="homework" type="number" min="0" max="600" placeholder="未知請留白"></label>
+      <label>恢復平靜時間（分）<input name="calmMinutes" type="number" min="0" max="600" placeholder="未知請留白"></label>
+      <label class="wide">觀察筆記（note）
+        <textarea name="note" maxlength="2000"></textarea>
+      </label>
+      <label>昨晚上床（bed）<input type="time" name="bed"></label>
+      <label>估計入睡（asleep）<input type="time" name="asleep"></label>
+      <label>今天起床（wake）<input type="time" name="wake"></label>
+      <label>睡眠時數（sleepHours）<input name="sleepHours" type="number" min="0" max="24" step="0.1"></label>
+      <label>打呼／鼻塞（snore）
+        <select name="snore">
+          <option value="">未知／未觀察</option>
+          <option>無觀察到</option>
+          <option>打呼</option>
+          <option>鼻塞</option>
+          <option>打呼與鼻塞</option>
+        </select>
+      </label>
+      <label>白天想睡情境（sleepy）
+        <select name="sleepy">
+          <option value="">未知／未觀察</option>
+          <option>沒有觀察到</option>
+          <option>坐著看書</option>
+          <option>上課或考試</option>
+          <option>其他活動</option>
+        </select>
+      </label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存修改</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 編輯打卡紀錄彈窗 -->
+  <dialog id="editSessionModal" class="no-print">
+    <form method="dialog"><button class="close" aria-label="關閉">×</button></form>
+    <span class="eyebrow">修正打卡紀錄</span>
+    <h2>編輯練習紀錄</h2>
+    <form id="editSessionForm" class="form-grid">
+      <input type="hidden" name="id">
+      <label>日期<input name="date" type="date" required></label>
+      <label>難度
+        <select name="level">
+          <option value="easy">簡單 (easy)</option>
+          <option value="normal">一般 (normal)</option>
+          <option value="challenge">進階 (challenge)</option>
+        </select>
+      </label>
+      <label>安排分鐘數<input name="planned" type="number" min="1" max="120" required></label>
+      <label>實際計時（秒）<input name="elapsed" type="number" min="0" max="7200" required></label>
+      <label>分心次數<input name="distractions" type="number" min="0" max="999" required></label>
+      <label>獲得點數（earned）<input name="earned" type="number" min="1" max="10" required></label>
+      <div class="wide modal-actions">
+        <button type="submit" class="primary">儲存修改</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
